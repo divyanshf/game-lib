@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include "Color.h"
+#include <conio.h>
 
 class Tic
 {
@@ -8,11 +9,12 @@ private:
 	const int cells = 3;
 	int board[3][3];
 	int boardCount=0;
-	int turn;
-	int win;
+	int turn, win;
+	int row, col;
 	void toggleTurn();
 	void getWinner();
 	void endGame();
+
 public:
 	Tic() {
 		for (int i = 0; i < cells; i++) {
@@ -22,31 +24,33 @@ public:
 		}
 		turn = 0;
 		win = -1;
+		row = 0, col = 0;
 	}
 	void draw(int end);
-	void playChance(int *game);
+	void playChance(int* game);
+	void input(int *game);
 };
 
 //	Draw the board and the stats
 void Tic::draw(int end) {
 	system("cls");
-	std::cout << Color(14) << "TIC-TAE-TOE" << Color(7) << std::endl;
-	if(!end)
-		std::cout << "TURN:\tPlayer " << turn+1 << std::endl;
+	std::cout << Color(14) << "< < < TIC-TAE-TOE > > >\n" << Color(7) << std::endl;
+	if (!end)
+		std::cout << "TURN:\n" << Color(2) << "Player" << turn + 1 << Color(7) << std::endl << std::endl;;
 	for (int i = 0; i < cells; i++) {
 		std::cout << "\t";
 		for (int j = 0; j < cells; j++) {
 			if (board[i][j] == 1) {
-				std::cout << "X";
+				std::cout << (row==i && col==j ? Color(4) : Color(6)) << "X " << Color(7);
 			}
 			else if (board[i][j] == 0) {
-				std::cout << "O";
+				std::cout << (row == i && col == j ? Color(4) : Color(9)) << "O " << Color(7);
 			}
-			else {
-				std::cout << "-";
+			else{
+				std::cout << (row == i && col == j ? Color(4) : Color(7)) << (row == i && col == j ? "# " : "_ ") << Color(7);
 			}
 		}
-		std::cout << std::endl;
+		std::cout << std::endl << std::endl;
 	}
 	if (end) {
 		endGame();
@@ -84,6 +88,41 @@ void Tic::playChance(int *game) {
 	}
 }
 
+void Tic::input(int *game) {
+	int ch = _getch();
+	switch (ch) {
+	case 72:
+		//up
+		row = (row== 0 ? 0 : row- 1);
+		break;
+	case 77:
+		//right
+		col = (col==cells-1 ? cells-1 : col + 1);
+		break;
+	case 75:
+		//left
+		col = (col==0 ? 0 : col - 1);
+		break;
+	case 80:
+		//down
+		row = (row==cells-1 ? cells - 1 : row + 1);
+		break;
+	case 13:
+		//enter
+		if (board[row][col] == -1) {
+			board[row][col] = turn;
+			boardCount++;
+			toggleTurn();
+			getWinner();
+			if (win != -1 || boardCount == cells * cells) {
+				*game = 0;
+				draw(1);
+			}
+		}
+		break;
+	}
+}
+
 //	Toggle turn
 void Tic::toggleTurn() {
 	turn = !turn;
@@ -93,10 +132,10 @@ void Tic::toggleTurn() {
 void Tic::endGame() {
 	std::cout << Color(4) << "GAME OVER!" << std::endl;
 	if (win == -1) {
-		std::cout << Color(11) << "DRAW!!!" << std::endl;
+		std::cout << Color(2) << "DRAW!!!" << std::endl;
 	}
 	else {
-		std::cout << Color(2) << "PLAYER " << win+1 << " Wins!!!" << std::endl;
+		std::cout << (win+1==1 ? Color(9) : Color(6)) << "PLAYER " << win+1 << " Wins!!!" << std::endl;
 	}
 	std::cout << Color(7) << "Press any key to exit . . ." << std::endl;
 }

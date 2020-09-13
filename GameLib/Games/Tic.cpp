@@ -6,7 +6,7 @@ void ticMain() {
 	int game = 1;
 	while (game) {
 		ticObj.draw(0);
-		ticObj.playChance(&game);
+		ticObj.input(&game);
 	}
 	std::cin.get();
 }

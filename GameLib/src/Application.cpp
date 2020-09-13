@@ -9,7 +9,7 @@ void ticMain();
 void snakeMain();
 
 int main() {
-	int option;
+	std::vector <std::string>::size_type option;
 	Menu menuObj;
 	while(1) {
 		menuObj.drawMenu();
@@ -17,7 +17,6 @@ int main() {
 		switch (option) {
 		case 0:
 			ticMain();
-			std::cin.get();
 			break;
 		case 1:
 			snakeMain();
