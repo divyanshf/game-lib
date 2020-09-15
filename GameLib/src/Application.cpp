@@ -2,11 +2,17 @@
 #include <string>
 #include <vector>
 #include <windows.h>
-#include "../Headers/Color.h"
-#include "../Headers/Menu.h"
+#include "Color.h"
+#include "Menu.h"
+#include "Tic.h"
 
-void ticMain();
-void snakeMain();
+//	tic-tac-toe
+void ticTacToe() {
+	Tic obj('O', 'X', 0);
+	obj.run();
+}
+
+void pongMain();
 
 int main() {
 	std::vector <std::string>::size_type option;
@@ -16,10 +22,10 @@ int main() {
 		option = menuObj.input();
 		switch (option) {
 		case 0:
-			ticMain();
+			ticTacToe();
 			break;
 		case 1:
-			snakeMain();
+			pongMain();
 			std::cin.get();
 			break;
 		case 2:

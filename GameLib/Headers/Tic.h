@@ -1,173 +1,232 @@
-#pragma once
 #include <iostream>
+#include <windows.h>
+#include <tuple>
+#include <map>
 #include "Color.h"
-#include <conio.h>
+
+typedef std::tuple<int, int> Cord;
 
 class Tic
 {
 private:
-	const int cells = 3;
-	int board[3][3];
-	int boardCount=0;
-	int turn, win;
-	int row, col;
-	void toggleTurn();
-	void getWinner();
-	void endGame();
-
+    char board[3][3];
+    int game, turn, boardCount;
+    int row, col;
+    char human, ai, winner;
+    std::map<char, int> scoreMap;
+    void draw(int end);
+    void takeInput();
+    void aiMove();
+    char getResult();
+    Cord findMove();
+    int minimax(int depth, bool isMaximizing);
+    void endGame();
 public:
-	Tic() {
-		for (int i = 0; i < cells; i++) {
-			for (int j = 0; j < cells; j++) {
-				board[i][j] = -1;
-			}
-		}
-		turn = 0;
-		win = -1;
-		row = 0, col = 0;
-	}
-	void draw(int end);
-	void playChance(int* game);
-	void input(int *game);
+    Tic(char comp, char player, int first);
+    void run();
 };
 
-//	Draw the board and the stats
+Tic::Tic(char comp, char player, int first)
+{
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            board[i][j] = '_';
+        }
+    }
+    scoreMap.insert(std::pair<char, int>(comp, 1));
+    scoreMap.insert(std::pair<char, int>(player, -1));
+    scoreMap.insert(std::pair<char, int>('D', 0));
+    human = player;
+    ai = comp;
+    turn = first;
+    winner = 'N';
+    boardCount = 0;
+    row = 0;
+    col = 0;
+    game = 1;
+}
+
 void Tic::draw(int end) {
-	system("cls");
-	std::cout << Color(14) << "< < < TIC-TAE-TOE > > >\n" << Color(7) << std::endl;
-	if (!end)
-		std::cout << "TURN:\n" << Color(2) << "Player" << turn + 1 << Color(7) << std::endl << std::endl;;
-	for (int i = 0; i < cells; i++) {
-		std::cout << "\t";
-		for (int j = 0; j < cells; j++) {
-			if (board[i][j] == 1) {
-				std::cout << (row==i && col==j ? Color(4) : Color(6)) << "X " << Color(7);
-			}
-			else if (board[i][j] == 0) {
-				std::cout << (row == i && col == j ? Color(4) : Color(9)) << "O " << Color(7);
-			}
-			else{
-				std::cout << (row == i && col == j ? Color(4) : Color(7)) << (row == i && col == j ? "# " : "_ ") << Color(7);
-			}
-		}
-		std::cout << std::endl << std::endl;
-	}
-	if (end) {
-		endGame();
-	}
+    system("cls");
+    std::cout << Color(14) << "< < < TIC-TAC-TOE > > >" << Color(7) << std::endl;
+    if (!end) {
+        std::cout << "\nTurn: " << Color(5) << (turn ? "Computer\n" : "YOU\n") << Color(7) << std::endl;
+    }
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            if (i == row && j == col) {
+                std::cout << Color(4) << (board[i][j] == '_' ? '#' : board[i][j]) << " " << Color(7);
+            }
+            else {
+                std::cout << (board[i][j] == ai ? Color(3) : (board[i][j] == human ? Color(6) : Color(7))) << board[i][j] << " " << Color(7);
+            }
+        }
+        std::cout << std::endl;
+    }
+    if (end) {
+        endGame();
+        game = 0;
+    }
 }
 
-//	Input values for turn
-void Tic::playChance(int *game) {
-	int r,c;
-	while (1) {
-		std::cout << "Type in the row and the column of the cell you want to use." << std::endl;
-		std::cout << "Enter the row:\n";
-		std::cin >> r;
-		std::cout << "Enter the column:\n";
-		std::cin >> c;
-		if (r > 0 && r < 4 && c > 0 && r < 4) {
-			if (board[r - 1][c - 1] == -1) {
-				board[r - 1][c - 1] = turn;
-				boardCount++;
-				toggleTurn();
-				getWinner();
-				if (win != -1 || boardCount == cells*cells) {
-					*game = 0;
-					draw(1);
-				}
-				break;
-			}
-			else {
-				std::cout << "The cell is already filled!" << std::endl;
-			}
-		}
-		else {
-			std::cout << "Please enter a valid cell row and column" << std::endl;
-		}
-	}
-}
-
-void Tic::input(int *game) {
-	int ch = _getch();
-	switch (ch) {
-	case 72:
-		//up
-		row = (row== 0 ? 0 : row- 1);
-		break;
-	case 77:
-		//right
-		col = (col==cells-1 ? cells-1 : col + 1);
-		break;
-	case 75:
-		//left
-		col = (col==0 ? 0 : col - 1);
-		break;
-	case 80:
-		//down
-		row = (row==cells-1 ? cells - 1 : row + 1);
-		break;
-	case 13:
-		//enter
-		if (board[row][col] == -1) {
-			board[row][col] = turn;
-			boardCount++;
-			toggleTurn();
-			getWinner();
-			if (win != -1 || boardCount == cells * cells) {
-				*game = 0;
-				draw(1);
-			}
-		}
-		break;
-	}
-}
-
-//	Toggle turn
-void Tic::toggleTurn() {
-	turn = !turn;
-}
-
-//	End Game
 void Tic::endGame() {
-	std::cout << Color(4) << "GAME OVER!" << std::endl;
-	if (win == -1) {
-		std::cout << Color(2) << "DRAW!!!" << std::endl;
-	}
-	else {
-		std::cout << (win+1==1 ? Color(9) : Color(6)) << "PLAYER " << win+1 << " Wins!!!" << std::endl;
-	}
-	std::cout << Color(7) << "Press any key to exit . . ." << std::endl;
+    std::cout << Color(4) << "\nGAME ENDED!" << Color(7) << std::endl;
+    if (winner != 'D') {
+        std::cout << Color(2) << (winner == ai ? "Computer is" : "You are") << " the winner!" << Color(7) << std::endl;
+    }
+    else {
+        std::cout << Color(3) << "ITS A DRAW!!!" << Color(7) << std::endl;
+    }
+    std::cout << "Press any key to exit . . ." << std::endl;
+    std::cin.get();
 }
 
-//	Get the winner
-void Tic::getWinner() {
-	int midElement = board[1][1];
-	if (midElement == board[0][0] && midElement == board[2][2]) {
-		win = midElement;
-	}
-	else if (midElement == board[0][2] && midElement == board[2][0]) {
-		win = midElement;
-	}
-	else if (midElement == board[0][1] && midElement == board[2][1]) {
-		win = midElement;
-	}
-	else if (midElement == board[1][0] && midElement == board[1][2]) {
-		win = midElement;
-	}
-	else if (board[0][0] == board[0][1] && board[0][0] == board[0][2]) {
-		win = board[0][0];
-	}
-	else if (board[0][0] == board[1][0] && board[0][0] == board[2][0]) {
-		win = board[0][0];
-	}
-	else if (board[2][2] == board[2][1] && board[2][2] == board[2][0]) {
-		win = board[2][2];
-	}
-	else if (board[2][2] == board[1][2] && board[2][2] == board[0][2]) {
-		win = board[2][2];
-	}
-	else {
-		win = -1;
-	}
+void Tic::takeInput() {
+    int ch = _getch();
+    switch (ch) {
+    case 72:
+        //up
+        row = (row == 0 ? 2 : row - 1);
+        break;
+    case 75:
+        //left
+        col = (col == 0 ? 2 : col - 1);
+        break;
+    case 77:
+        //right
+        col = (col == 2 ? 0 : col + 1);
+        break;
+    case 80:
+        //down
+        row = (row == 2 ? 0 : row + 1);
+        break;
+    case 13:
+        //enter
+        if (board[row][col] == '_') {
+            board[row][col] = human;
+            boardCount++;   //  total elements
+            winner = getResult();
+            if (winner != 'N') {
+                draw(1);
+            }
+            turn = 1;   //  toggle turn
+        }
+        break;
+    }
+}
+
+int Tic::minimax(int depth, bool isMaximizing) {
+    char result = getResult();
+    if (result != 'N') {
+        return scoreMap[result];
+    }
+    if (isMaximizing) {
+        int bestScore = -100;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (board[i][j] == '_') {
+                    board[i][j] = ai;
+                    boardCount++;
+                    int score = minimax(depth + 1, false);
+                    board[i][j] = '_';
+                    boardCount--;
+                    bestScore = max(score, bestScore);
+                }
+            }
+        }
+        return bestScore;
+    }
+    else {
+        int bestScore = 100;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (board[i][j] == '_') {
+                    board[i][j] = human;
+                    boardCount++;
+                    int score = minimax(depth + 1, true);
+                    board[i][j] = '_';
+                    boardCount--;
+                    bestScore = min(score, bestScore);
+                }
+            }
+        }
+        return bestScore;
+    }
+}
+
+Cord Tic::findMove() {
+    Cord bestMove;
+    int bestScore = -100;
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            if (board[i][j] == '_') {
+                board[i][j] = ai;
+                boardCount++;
+                int score = minimax(0, false);
+                board[i][j] = '_';
+                boardCount--;
+                if (score > bestScore) {
+                    bestScore = score;
+                    bestMove = std::make_tuple(i, j);
+                }
+            }
+        }
+    }
+    return bestMove;
+}
+
+void Tic::aiMove() {
+    Cord bestMove = findMove();
+    int i = std::get<0>(bestMove);
+    int j = std::get<1>(bestMove);
+    board[i][j] = ai;
+    boardCount++;   //  total elements
+    winner = getResult();
+    if (winner != 'N') {
+        draw(1);
+    }
+    turn = 0;   //  toggle turn
+}
+
+char Tic::getResult() {
+    for (int i = 0; i < 3; i++) {
+        if (board[i][0] == board[i][1] && board[i][1] == board[i][2]) {
+            if (board[i][0] != '_')
+                return board[i][0];
+        }
+        if (board[0][i] == board[1][i] && board[1][i] == board[2][i]) {
+            if (board[0][i] != '_')
+                return board[0][i];
+        }
+    }
+    if (board[0][0] == board[1][1] && board[1][1] == board[2][2]) {
+        if (board[1][1] != '_')
+            return board[1][1];
+    }
+    if (board[0][2] == board[1][1] && board[1][1] == board[2][0]) {
+        if (board[1][1] != '_')
+            return board[1][1];
+    }
+    if (boardCount == 9) {
+        return 'D';
+    }
+    return 'N';
+}
+
+void Tic::run() {
+    while (1) {
+        draw(0);
+        if (turn == 0) {
+            takeInput();
+            if (!game) {
+                break;
+            }
+        }
+        else {
+            aiMove();
+            if (!game) {
+                break;
+            }
+        }
+    }
 }
