@@ -1,2 +1,3 @@
 ﻿  Application.cpp
+C:\Users\Dev\Desktop\GameLib\GameLib\Headers\Pong.h(142,13): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   GameLib.vcxproj -> C:\Users\Dev\Desktop\GameLib\x64\Debug\GameLib.exe

@@ -164,10 +164,10 @@ public:
 
 void GameManager::ScoreUp(Paddle* player) {
 	if (player == player1) {
-		score1++;
+		score1 += 10;
 	}
 	else if (player == player2) {
-		score2++;
+		score2 += 10;
 	}
 	ball->reset();
 	player1->reset();
@@ -176,6 +176,9 @@ void GameManager::ScoreUp(Paddle* player) {
 
 void GameManager::draw() {
 	system("cls");
+
+	std::cout << Color(14) << "< < < PONG > > >" << Color(7) << std::endl;
+
 	for (int i = 0; i < width + 2; i++) {
 		std::cout << "\xB2";
 	}
@@ -235,6 +238,8 @@ void GameManager::draw() {
 		std::cout << Color(7) << "\xB2" << Color(7);
 	}
 	std::cout << std::endl;
+
+	std::cout << Color(9) << "\nPlayer 1: " << (score1 == 0 ? Color(4) : Color(2)) << score1 << Color(9) << "\tPlayer 2: " << (score2 == 0 ? Color(4) : Color(2)) << score2 << Color(7) << std::endl;
 }
 
 void GameManager::input() {
@@ -330,6 +335,15 @@ void GameManager::run() {
 		draw();
 		input();
 		logic();
-		Sleep(50);
+		std::cout << Color(4) << "Press 'q' to quit ." << Color(7) << std::endl;
+		Sleep(10);
 	}
+	if (score1 != score2) {
+		std::cout << Color(2) << "Player " << (score1 > score2 ? "1" : "2") << " wins !!!" << Color(7) << std::endl;
+	}
+	else {
+		std::cout << Color(9) << "DRAW !!!" << Color(7) << std::endl;
+	}
+	std::cout << "Press any ket to exit . . ." << std::endl;
+	std::cin.get();
 }

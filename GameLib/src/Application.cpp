@@ -5,14 +5,35 @@
 #include "Color.h"
 #include "Menu.h"
 #include "Tic.h"
+#include "Pong.h"
 
 //	tic-tac-toe
 void ticTacToe() {
-	Tic obj('O', 'X', 0);
+	int players, turn;
+	int ch;
+	char player1, player2;
+	TicMenu menuObj;
+	std::tuple <int, int, int> ticInfo = menuObj.run();
+	players = std::get<0>(ticInfo);
+	ch = std::get<1>(ticInfo);
+	if (ch == 0) {
+		player1 = 'O';
+		player2 = 'X';
+	}
+	else {
+		player1 = 'X';
+		player2 = 'O';
+	}
+	turn = std::get<2>(ticInfo);
+	std::cout << player1 << " " << player2 << std::endl;
+	Tic obj(player1, player2, turn, players);
 	obj.run();
 }
 
-void pongMain();
+void pongMain() {
+	GameManager game(40, 20);
+	game.run();
+}
 
 int main() {
 	std::vector <std::string>::size_type option;
@@ -26,7 +47,6 @@ int main() {
 			break;
 		case 1:
 			pongMain();
-			std::cin.get();
 			break;
 		case 2:
 			system("cls");

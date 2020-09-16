@@ -18,9 +18,6 @@
     <ClCompile Include="src\Application.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Pong\Pong.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Headers\Color.h">
@@ -29,10 +26,10 @@
     <ClInclude Include="Headers\Menu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Pong\Pong.h">
+    <ClInclude Include="Headers\Tic.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Headers\Tic.h">
+    <ClInclude Include="Headers\Pong.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

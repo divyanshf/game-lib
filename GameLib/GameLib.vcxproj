@@ -141,14 +141,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Pong\Pong.cpp" />
     <ClCompile Include="src\Application.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Headers\Color.h" />
     <ClInclude Include="Headers\Menu.h" />
     <ClInclude Include="Headers\Tic.h" />
-    <ClInclude Include="Pong\Pong.h" />
+    <ClInclude Include="Headers\Pong.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
