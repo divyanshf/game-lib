@@ -21,15 +21,16 @@ private:
 	Paddle* player1;
 	Paddle* player2;
 	int score1, score2;
-public:
-	Pong();
-	~Pong();
-	void loop();
 	void render();
 	void draw(Object obj);
 	void draw(const char* msg, TTF_Font* font, int x, int y, int r, int g, int b);
 	void logic();
 	void input();
+	void scoreUp(Paddle* player);
+public:
+	Pong();
+	~Pong();
+	void loop();
 };
 
 

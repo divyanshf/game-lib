@@ -54,6 +54,7 @@ Pong::Pong() {
 	player2->setSource(0, 0, 20, 100);
 
 	//	initialize additional variables
+	score1 = score2 = 0;
 	running = 1;
 }
 
@@ -137,10 +138,64 @@ void Pong::draw(const char* msg, TTF_Font* font, int x, int y, int r, int g, int
 }
 
 void Pong::logic() {
+	int ballX = ball->getX();
+	int ballY = ball->getY();
+	int player1X = player1->getX();
+	int player2X = player2->getX();
+	int player1Y = player1->getY();
+	int player2Y = player2->getY();
 
+	//left paddle
+	if (ballX == player1X + 21) {
+		if (ballY >= player1Y && ballY <= player1Y - 25) {
+			ball->changeDirection((eDir)((rand() % 3) + 4));
+		}
+	}
+
+	//right paddle
+	if (ballX + 26 == player2X) {
+		if (ballY >= player2Y && ballY <= player2Y - 25) {
+			ball->changeDirection((eDir)((rand() % 3) + 1));
+		}
+	}
+
+	//bottom wall
+	if (ballY >= winHeight - 20 - 25) {
+		ball->changeDirection(ball->getDirection() == eDir::DOWNRIGHT ? eDir::UPRIGHT : eDir::UPLEFT);
+	}
+	//top wall
+	if (ballY <= winHeight - 20 - gameHeight) {
+		ball->changeDirection(ball->getDirection() == eDir::UPRIGHT ? eDir::DOWNRIGHT : eDir::DOWNLEFT);
+	}
+
+	//right wall 
+	if (ballX >= gameWidth - 5 - 20) {
+		//scoreUp(player1);
+		ball->changeDirection(ball->getDirection() == eDir::UPRIGHT ? eDir::UPLEFT : eDir::DOWNLEFT);
+	}
+	//left wall 
+	if (ballX <= 0) {
+		//scoreUp(player2);
+		ball->changeDirection(ball->getDirection() == eDir::UPLEFT ? eDir::UPRIGHT : eDir::DOWNRIGHT);
+	}
+}
+
+void Pong::scoreUp(Paddle* player) {
+	if (player == player1) {
+		score1 += 10;
+	}
+	else if (player == player2) {
+		score2 += 10;
+	}
+	ball->reset();
+	player1->reset();
+	player2->reset();
 }
 
 void Pong::input() {
+	ball->move();
+	ball->setDest(ball->getX(), ball->getY(), 25, 25);
+
 	SDL_Event event;
 	while (SDL_PollEvent(&event)) {
 
@@ -183,6 +238,11 @@ void Pong::input() {
 					player2->moveDown();
 					player2->setDest(player2->getX() - 25, player2->getY(), 20, 100);
 				}
+			}
+
+			//	ball randomize
+			if (ball->getDirection() == eDir::STOP) {
+				ball->randomDirection();
 			}
 		}
 	}
