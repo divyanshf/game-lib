@@ -72,6 +72,7 @@ void Pong::loop() {
 	while (running) {
 		render();
 		input();
+		logic();
 	}
 }
 
@@ -155,21 +156,33 @@ void Pong::input() {
 				running = 0;
 				std::cout << "Quitting" << std::endl;
 			}
+
+			//	Player 1 controls
 			if (event.key.keysym.sym == SDLK_w) {
-				player1->moveUp();
-				player1->setDest(player1->getX() + 5, player1->getY(), 20, 100);
+				if (player1->getY() > winHeight - gameHeight - 15) {
+					player1->moveUp();
+					player1->setDest(player1->getX() + 5, player1->getY(), 20, 100);
+				}
 			}
 			if (event.key.keysym.sym == SDLK_s) {
-				player1->moveDown();
-				player1->setDest(player1->getX() + 5, player1->getY(), 20, 100);
+				if (player1->getY() < winHeight - 100 - 23) {
+					player1->moveDown();
+					player1->setDest(player1->getX() + 5, player1->getY(), 20, 100);
+				}
 			}
+
+			//	Player 2 controls
 			if (event.key.keysym.sym == SDLK_UP) {
-				player2->moveUp();
-				player2->setDest(player2->getX() - 25, player2->getY(), 20, 100);
+				if (player2->getY() > winHeight - gameHeight - 15) {
+					player2->moveUp();
+					player2->setDest(player2->getX() - 25, player2->getY(), 20, 100);
+				}
 			}
 			if (event.key.keysym.sym == SDLK_DOWN) {
-				player2->moveDown();
-				player2->setDest(player2->getX() - 25, player2->getY(), 20, 100);
+				if (player2->getY() < winHeight - 100 - 23) {
+					player2->moveDown();
+					player2->setDest(player2->getX() - 25, player2->getY(), 20, 100);
+				}
 			}
 		}
 	}
