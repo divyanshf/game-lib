@@ -10,6 +10,7 @@ TicBoard::TicBoard(const char* p1, const char* p2) {
     scoreMap.insert(std::pair<const char*, int>(p1, 1)); // ai map
     scoreMap.insert(std::pair<const char*, int>(p2, -1));
     scoreMap.insert(std::pair<const char*, int>("D", 0));
+    srand(time(0));
     turn = (rand() % 2) < 0.5 ? 0 : 1;
     winner = "N";
     player1 = p1;

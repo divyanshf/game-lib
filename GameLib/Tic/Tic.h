@@ -15,7 +15,7 @@ class Tic
 private:
 	SDL_Renderer* ren;
 	SDL_Window* win;
-	TTF_Font* titleFont, * normalFont;
+	TTF_Font* titleFont, * normalFont, *playerFont;
 	int winWidth, winHeight;
 	TicBoard b;
 	Cord boardCords[3][3];

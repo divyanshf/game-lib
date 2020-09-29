@@ -2,6 +2,7 @@
 
 #include "Menu/Menu.h"
 #include "Tic/Tic.h"
+#include "Pong/Pong.h"
 
 void runTic() {
 	Tic obj;
@@ -10,7 +11,8 @@ void runTic() {
 }
 
 void runPong() {
-
+	Pong obj;
+	obj.loop();
 }
 
 int main() {

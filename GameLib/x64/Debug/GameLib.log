@@ -1,4 +1,4 @@
-﻿  Tic.cpp
-C:\Users\Dev\Desktop\GameLib\GameLib\Tic\Tic.cpp(73,17): warning C4101: 'textHeight': unreferenced local variable
-C:\Users\Dev\Desktop\GameLib\GameLib\Tic\Tic.cpp(129,17): warning C4101: 'textHeight': unreferenced local variable
+﻿  Application.cpp
+  Pong.cpp
+  Generating Code...
   GameLib.vcxproj -> C:\Users\Dev\Desktop\GameLib\x64\Debug\GameLib.exe

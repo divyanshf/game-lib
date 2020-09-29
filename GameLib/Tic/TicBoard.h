@@ -2,6 +2,7 @@
 #define TICBOARD_H
 
 #include <cstdlib>
+#include <time.h>
 #include <tuple>
 #include <map>
 
@@ -25,6 +26,8 @@ public:
 	int getTurn() { return turn; }
 	const char* getResult();
 	const char* getBoardChar(int row, int col) const { return board[row][col]; }
+	const char* getPlayer1() { return player1; }
+	const char* getPlayer2() { return player2; }
 };
 
 
