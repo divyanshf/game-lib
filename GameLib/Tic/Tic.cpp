@@ -178,8 +178,8 @@ void Tic::render() {
 
 	//	End game
 	if (game) {
-		SDL_Delay(3000);
 		running = 0;
+		SDL_Delay(3000);
 	}
 }
 
