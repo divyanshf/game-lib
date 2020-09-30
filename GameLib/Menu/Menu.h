@@ -7,9 +7,6 @@
 #include <SDL_image.h>
 #include <vector>
 
-#define WIDTH 800
-#define HEIGHT 640
-
 typedef std::vector <const char*> vecString;
 
 class Menu
@@ -17,6 +14,7 @@ class Menu
 private:
 	SDL_Renderer* ren;
 	SDL_Window* win;
+	int winWidth, winHeight;
 	TTF_Font* headFont, * questionFont, * optionFont;
 	const char* head, * question;
 	vecString list;

@@ -4,10 +4,12 @@ Menu::Menu() {
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
 		std::cout << "Failed at SDL_Init" << std::endl;
 	}
-	if (SDL_CreateWindowAndRenderer(WIDTH, HEIGHT, 0, &win, &ren) < 0) {
+	if (SDL_CreateWindowAndRenderer(800, 640, SDL_WINDOW_MAXIMIZED, &win, &ren) < 0) {
 		std::cout << "Failed at SDL_CreateWindowAndRenderer" << std::endl;
 	}
 	SDL_SetWindowTitle(win, "GameLib");
+
+	SDL_GetWindowSize(win, &winWidth, &winHeight);
 
 	TTF_Init();
 	head = "GameLib";
@@ -45,19 +47,19 @@ void Menu::render() {
 	int textWidth, textHeight;
 
 	SDL_Rect rect;
-	rect.w = WIDTH;
-	rect.h = HEIGHT;
+	rect.w = winWidth;
+	rect.h = winHeight;
 	rect.x = 0;
 	rect.y = 0;
 	SDL_RenderFillRect(ren, &rect);
 
 	//	Head Text
 	TTF_SizeText(headFont, head, &textWidth, NULL);
-	draw("GameLib", headFont, (WIDTH / 2) - (textWidth / 2), 10, 255, 255, 0);
+	draw("GameLib", headFont, (winWidth / 2) - (textWidth / 2), 10, 255, 255, 0);
 
 	//	Question text
 	TTF_SizeText(questionFont, question, &textWidth, NULL);
-	draw("What do you want to play ?", questionFont, (WIDTH / 2) - (textWidth / 2), 100, 0, 0, 255);
+	draw("What do you want to play ?", questionFont, (winWidth / 2) - (textWidth / 2), 100, 0, 0, 255);
 
 	//	Options Text
 	int j = 0;
@@ -76,7 +78,7 @@ void Menu::render() {
 		}
 		strcat_s(text, *i);
 		TTF_SizeText(optionFont, text, NULL, &textHeight);
-		draw(text, optionFont, (WIDTH / 2) - 50, 150 + j * (textHeight + 15), r, g, b);
+		draw(text, optionFont, (winWidth / 2) - 50, 150 + j * (textHeight + 15), r, g, b);
 		j++;
 	}
 

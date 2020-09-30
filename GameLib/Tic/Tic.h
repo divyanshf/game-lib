@@ -15,12 +15,12 @@ class Tic
 private:
 	SDL_Renderer* ren;
 	SDL_Window* win;
-	TTF_Font* titleFont, * normalFont, *playerFont;
-	int winWidth, winHeight;
+	TTF_Font* titleFont, * normalFont, * playerFont, * instructionFont;
 	TicBoard b;
 	Cord boardCords[3][3];
 	vecString ticOptions;
 	vecString::iterator ticOption;
+	int winWidth, winHeight;
 	int game;
 	const char* head;
 	int nPlayers;
