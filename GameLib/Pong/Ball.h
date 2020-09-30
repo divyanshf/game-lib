@@ -31,6 +31,7 @@ public:
 	void reset() {
 		x = originalX;
 		y = originalY;
+		direction = eDir::STOP;
 	}
 	void changeDirection(eDir d) {
 		direction = d;
@@ -46,26 +47,26 @@ public:
 		case eDir::STOP:
 			break;
 		case eDir::LEFT:
-			x--;
+			x -= 2;
 			break;
 		case eDir::RIGHT:
-			x++;
+			x += 2;
 			break;
 		case eDir::UPLEFT:
-			x--;
-			y--;
+			x -= 2;
+			y -= 2;
 			break;
 		case eDir::UPRIGHT:
-			x++;
-			y--;
+			x += 2;
+			y -= 2;
 			break;
 		case eDir::DOWNLEFT:
-			x--;
-			y++;
+			x -= 2;
+			y += 2;
 			break;
 		case eDir::DOWNRIGHT:
-			x++;
-			y++;
+			x += 2;
+			y += 2;
 			break;
 		default:
 			break;

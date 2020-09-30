@@ -25,10 +25,10 @@ public:
 	inline int getX() { return x; }
 	inline int getY() { return y; }
 	inline void moveUp() {
-		y -= 10;
+		y -= 13;
 	}
 	inline void moveDown() {
-		y += 10;
+		y += 13;
 	}
 };
 

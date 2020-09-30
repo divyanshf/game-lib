@@ -2,25 +2,31 @@
 #define PONG_H
 
 #include <iostream>
+#include <string>
+#include <vector>
 #include <SDL.h>
 #include <SDL_ttf.h>
 #include "Ball.h"
 #include "Paddle.h"
+
+typedef std::vector <const char*> vecString;
 
 class Pong
 {
 private:
 	SDL_Renderer* ren;
 	SDL_Window* win;
-	TTF_Font* titleFont, * normalFont;
+	TTF_Font* titleFont, * normalFont, * instructionFont;
 	int winWidth, winHeight;
 	const char* head;
-	int running;
+	int running, game;
 	int gameWidth, gameHeight;
 	Ball* ball;
 	Paddle* player1;
 	Paddle* player2;
 	int score1, score2;
+	vecString pongOptions;
+	vecString::iterator pongOption;
 	void render();
 	void draw(Object obj);
 	void draw(const char* msg, TTF_Font* font, int x, int y, int r, int g, int b);
