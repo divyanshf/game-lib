@@ -1,2 +1,14 @@
-﻿  Pong.cpp
-  GameLib.vcxproj -> C:\Users\Dev\Desktop\GameLib\x64\Debug\GameLib.exe
+﻿  Application.cpp
+  Menu.cpp
+C:\Users\PRATEEK SINGH\GameLib\GameLib\Menu\Menu.cpp(39,24): warning C4244: 'return': conversion from '__int64' to 'int', possible loss of data
+  Object.cpp
+  Pong.cpp
+  Tic.cpp
+C:\Users\PRATEEK SINGH\GameLib\GameLib\Tic\Tic.cpp(89,61): warning C4244: '=': conversion from '__int64' to 'int', possible loss of data
+C:\Users\PRATEEK SINGH\GameLib\GameLib\Tic\Tic.cpp(99,17): warning C4101: 'textHeight': unreferenced local variable
+C:\Users\PRATEEK SINGH\GameLib\GameLib\Tic\Tic.cpp(159,17): warning C4101: 'textHeight': unreferenced local variable
+  TicBoard.cpp
+C:\Users\PRATEEK SINGH\GameLib\GameLib\Tic\TicBoard.cpp(13,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Generating Code...
+C:\Users\PRATEEK SINGH\GameLib\GameLib\Menu\Menu.cpp(42): warning C4715: 'Menu::loop': not all control paths return a value
+  GameLib.vcxproj -> C:\Users\PRATEEK SINGH\GameLib\x64\Debug\GameLib.exe
