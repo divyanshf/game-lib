@@ -38,7 +38,8 @@ Tic::Tic() : b("O", "X") {
 	titleFont = TTF_OpenFont("Fonts/Chopsic/Chopsic-K6Dp.ttf", 48);
 	normalFont = TTF_OpenFont("Fonts/Montserrat/MontserratLight-ywBvq.ttf", 24);
 	playerFont = TTF_OpenFont("Fonts/Montserrat/MontserratLight-ywBvq.ttf", 56);
-	
+	instructionFont = TTF_OpenFont("Fonts/Montserrat/MontserratLight-ywBvq.ttf", 16);
+
 	//	Initialize remaining variables
 	nPlayers = 1;
 	game = 1;
@@ -172,6 +173,10 @@ void Tic::render() {
 
 	//	Board and players
 	draw();
+	
+	//	Instructions
+	TTF_SizeText(instructionFont, "Press ESC to close", &textWidth, &textHeight);
+	draw("Press ESC to close", instructionFont, winWidth - textWidth, winHeight - textHeight, 191, 191, 63);
 
 	//	Render the items
 	SDL_RenderPresent(ren);
@@ -186,6 +191,7 @@ void Tic::render() {
 //	Tic draw 
 void Tic::draw() {
 	int textWidth, textHeight;
+	int lineX1, lineY1, lineX2, lineY2;
 
 	SDL_SetRenderDrawColor(ren, 255, 255, 255, SDL_ALPHA_OPAQUE);
 
@@ -215,10 +221,10 @@ void Tic::draw() {
 		}
 	}
 
+
 	//	Player 1 Text
 	TTF_SizeText(titleFont, b.getPlayer1(), &textWidth, &textHeight);
 	draw(b.getPlayer1(), playerFont, (winWidth / 2 - 150) / 2 - textWidth / 2, winHeight / 2 - textHeight / 2, 255, 153, 51);
-	
 	if (nPlayers == 2) {
 		TTF_SizeText(normalFont, "Player 1", &textWidth, &textHeight);
 		draw("Player 1", normalFont, (winWidth / 2 - 150) / 2 - textWidth / 2, winHeight / 2 - textHeight / 2 + 100, 255, 153, 51);
@@ -227,12 +233,16 @@ void Tic::draw() {
 		TTF_SizeText(normalFont, "Computer", &textWidth, &textHeight);
 		draw("Computer", normalFont, (winWidth / 2 - 150) / 2 - textWidth / 2, winHeight / 2 - textHeight / 2 + 100, 255, 153, 51);
 	}
-
+	if (b.getTurn() == 0) {
+		lineX1 = (winWidth / 2 - 150) / 2 - textWidth / 2 - 15;
+		lineX2 = lineX1 + textWidth + 20;
+		lineY1 = winHeight / 2 - textHeight / 2 + 200;
+		lineY2 = lineY1;
+	}
 
 	//	Player 2 Text
 	TTF_SizeText(titleFont, b.getPlayer2(), &textWidth, &textHeight);
 	draw(b.getPlayer2(), playerFont, ((winWidth / 2 + 150) + winWidth) / 2 - textWidth / 2, winHeight / 2 - textHeight / 2, 51, 153, 255);
-	
 	if (nPlayers == 2) {
 		TTF_SizeText(normalFont, "Player 2", &textWidth, &textHeight);
 		draw("Player 2", normalFont, ((winWidth / 2 + 150) + winWidth) / 2 - textWidth / 2, winHeight / 2 - textHeight / 2 + 100, 51, 153, 255);
@@ -241,6 +251,15 @@ void Tic::draw() {
 		TTF_SizeText(normalFont, "You", &textWidth, &textHeight);
 		draw("You", normalFont, ((winWidth / 2 + 150) + winWidth) / 2 - textWidth / 2, winHeight / 2 - textHeight / 2 + 100, 51, 153, 255);
 	}
+	if (b.getTurn() == 1) {
+		lineX1 = ((winWidth / 2 + 150) + winWidth) / 2 - textWidth / 2 - 15;
+		lineX2 = lineX1 + textWidth + 20;
+		lineY1 = winHeight / 2 - textHeight / 2 + 200;
+		lineY2 = lineY1;
+	}
+
+	//	Turn Indicator
+	SDL_RenderDrawLine(ren, lineX1, lineY1, lineX2, lineY2);
 
 	//	End game
 	if (game) {

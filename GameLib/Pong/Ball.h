@@ -19,6 +19,7 @@ class Ball : public Object
 private:
 	int x, y;
 	int originalX, originalY;
+	int speed;
 	eDir direction;
 public:
 	Ball(int posX, int posY) {
@@ -26,6 +27,7 @@ public:
 		originalY = posY;
 		x = posX;
 		y = posY;
+		speed = 1;
 		direction = eDir::STOP;
 	}
 	void reset() {
@@ -47,26 +49,26 @@ public:
 		case eDir::STOP:
 			break;
 		case eDir::LEFT:
-			x -= 2;
+			x -= speed;
 			break;
 		case eDir::RIGHT:
-			x += 2;
+			x += speed;
 			break;
 		case eDir::UPLEFT:
-			x -= 2;
-			y -= 2;
+			x -= speed;
+			y -= speed;
 			break;
 		case eDir::UPRIGHT:
-			x += 2;
-			y -= 2;
+			x += speed;
+			y -= speed;
 			break;
 		case eDir::DOWNLEFT:
-			x -= 2;
-			y += 2;
+			x -= speed;
+			y += speed;
 			break;
 		case eDir::DOWNRIGHT:
-			x += 2;
-			y += 2;
+			x += speed;
+			y += speed;
 			break;
 		default:
 			break;

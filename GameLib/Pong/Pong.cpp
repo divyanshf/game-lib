@@ -290,7 +290,7 @@ void Pong::input() {
 
 			//	Player 1 controls
 			if (event.key.keysym.sym == SDLK_w) {
-				if (player1->getY() > winHeight - gameHeight - 8) {
+				if (player1->getY() > winHeight - gameHeight - 25) {
 					player1->moveUp();
 					player1->setDest(player1->getX() + 5, player1->getY(), 20, 100);
 				}
@@ -304,7 +304,7 @@ void Pong::input() {
 
 			//	Player 2 controls
 			if (event.key.keysym.sym == SDLK_UP) {
-				if (player2->getY() > winHeight - gameHeight - 8) {
+				if (player2->getY() > winHeight - gameHeight - 25) {
 					player2->moveUp();
 					player2->setDest(player2->getX() - 25, player2->getY(), 20, 100);
 				}
