@@ -1,22 +1,11 @@
 #include "Pong.h"
 
 //	Pong Constructor
-Pong::Pong() {
+Pong::Pong(SDL_Renderer* ren, SDL_Window* win) {
 	//	Initialize SDL
-	if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
-		std::cout << "Failed at SDL_Init" << std::endl;
-	}
-
-	//	Create window and renderer
-	if (SDL_CreateWindowAndRenderer(800, 640, SDL_WINDOW_FULLSCREEN, &win, &ren) < 0) {
-		std::cout << "Failed at SDL_CreateWindowAndRenderer" << std::endl;
-	}
-
-	//	Set window title
-	SDL_SetWindowTitle(win, "GameLib : Tic-Tac-Toe");
-
-	//	Set window size
-	SDL_GetWindowSize(win, &winWidth, &winHeight);
+	this->ren = ren;
+	this->win = win;
+	SDL_GetWindowSize(this->win, &winWidth, &winHeight);
 
 	//	Initialize TTF
 	TTF_Init();
@@ -26,6 +15,18 @@ Pong::Pong() {
 	head = "PONG";
 	int textHeight;
 	TTF_SizeText(titleFont, head, NULL, &textHeight);
+
+	//	Initialize audio
+	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
+		std::cout << "Failed at Mi_OpenAudio()" << std::endl;
+	}
+	Mix_VolumeMusic(5);
+	bgm = Mix_LoadMUS("Audio/Bgm.wav");
+	collideEffect = Mix_LoadWAV("Audio/Collide.wav");
+	loseEffect = Mix_LoadWAV("Audio/Lose.wav");
+	winnerEffect = Mix_LoadWAV("Audio/Win.wav");
+	startEffect = Mix_LoadWAV("Audio/Start.wav");
+	wallEffect = Mix_LoadWAV("Audio/Click.wav");
 
 	//	Initialize options
 	pongOptions.push_back("1");
@@ -37,26 +38,26 @@ Pong::Pong() {
 	gameHeight = (winHeight - 20) - (textHeight + 100);
 
 	//	Game Assets
-	ball = new Ball(gameWidth / 2, textHeight + 100 + gameHeight / 2);
-	player1 = new Paddle(1, textHeight + 100 + gameHeight / 2);
-	player2 = new Paddle(gameWidth - 1, textHeight + 100 + gameHeight / 2);
+	ball = new Ball(gameWidth / 2, (winHeight - 20) - gameHeight / 2 - 12);
+	player1 = new Paddle(1, (winHeight - 20) - gameHeight / 2 - 50);
+	player2 = new Paddle(gameWidth - 1, (winHeight - 20) - gameHeight / 2 - 50);
 
 	std::cout << (player1->getX()) << std::endl;
 	std::cout << (player2->getX()) << std::endl;
 
 	//	Set src for ball
 	ball->setDest(ball->getX(), ball->getY(), 25, 25);
-	ball->setImage("Assets/ball.png", ren);
+	ball->setImage("Assets/Pong/ball.png", ren);
 	ball->setSource(0, 0, 25, 25);
 	
 	//	Set src for player 1
 	player1->setDest(player1->getX() + 5, player1->getY(), 20, 100);
-	player1->setImage("Assets/paddle.png", ren);
+	player1->setImage("Assets/Pong/paddle.png", ren);
 	player1->setSource(0, 0, 20, 100);
 	
 	//	Set src for player 2
 	player2->setDest(player2->getX() - 25, player2->getY(), 20, 100);
-	player2->setImage("Assets/paddle.png", ren);
+	player2->setImage("Assets/Pong/paddle.png", ren);
 	player2->setSource(0, 0, 20, 100);
 
 	//	initialize additional variables
@@ -67,13 +68,16 @@ Pong::Pong() {
 
 //	Pong Destructor
 Pong::~Pong() {
+	Mix_FreeChunk(collideEffect);
+	Mix_FreeChunk(loseEffect);
+	Mix_FreeChunk(winnerEffect);
+	Mix_FreeChunk(wallEffect);
+	Mix_FreeMusic(bgm);
+	Mix_Quit();
 	TTF_CloseFont(titleFont);
 	TTF_CloseFont(normalFont);
 	TTF_CloseFont(instructionFont);
 	TTF_Quit();
-	SDL_DestroyRenderer(ren);
-	SDL_DestroyWindow(win);
-	SDL_Quit();
 }
 
 //	Pong Loop
@@ -87,10 +91,11 @@ void Pong::loop() {
 
 //	Pong render
 void Pong::render() {
-	SDL_SetRenderDrawColor(ren, 0, 0, 0, 255);
+	SDL_RenderClear(ren);
+
 	int textWidth, textHeight;
 
-	//	Background rectangle
+	SDL_SetRenderDrawColor(ren, 0, 0, 0, 255);
 	SDL_Rect rect;
 	rect.w = winWidth;
 	rect.h = winHeight;
@@ -101,9 +106,8 @@ void Pong::render() {
 	//	Head Text
 	TTF_SizeText(titleFont, head, &textWidth, &textHeight);
 	draw(head, titleFont, (winWidth / 2) - (textWidth / 2), 10, 255, 255, 0);
-
-	//	Set the render color 
-	SDL_SetRenderDrawColor(ren, 255, 255, 255, 255);
+	
+	draw(textHeight);
 	
 	//	Scores player1
 	TTF_SizeText(normalFont, "Player 1 :", &textWidth, &textHeight);
@@ -116,6 +120,31 @@ void Pong::render() {
 	draw("Player 2 :", normalFont, winWidth - textWidth - 1, 50, 51, 153, 255);
 	score = std::to_string(score2);
 	draw(score.c_str(), normalFont, winWidth - textWidth - 1, 50 + textHeight + 10, 0, 255, 0);
+
+	//	Instructions
+	TTF_SizeText(instructionFont, "Press Q to end", &textWidth, &textHeight);
+	draw("Press Q to end", instructionFont, 0, winHeight - textHeight, 191, 191, 63);
+
+	TTF_SizeText(instructionFont, "Press ESC to close", &textWidth, &textHeight);
+	draw("Press ESC to close", instructionFont, winWidth - textWidth, winHeight - textHeight, 191, 191, 63);
+
+	SDL_SetRenderDrawColor(ren, 0, 0, 0, 255);
+	//	Render the items
+	SDL_RenderPresent(ren);
+
+	if (!game) {
+		running = 0;
+		SDL_Delay(3000);
+	}
+
+}
+
+void Pong::draw(int titleHeight) {
+
+	int textWidth, textHeight;
+	textHeight = titleHeight;
+	//	Set the render color 
+	SDL_SetRenderDrawColor(ren, 255, 255, 255, SDL_ALPHA_OPAQUE);
 
 	//	Draw the borders
 	SDL_RenderDrawLine(ren, 0, textHeight + 100, winWidth - 1, textHeight + 100);
@@ -138,41 +167,18 @@ void Pong::render() {
 		draw(*player2);
 	}
 	else {
-		std::string score;
 		if (score1 > score2) {
-			score = std::to_string(score1);
-			TTF_SizeText(normalFont, "Player 1 is the winner with a score of ", &textWidth, &textHeight);
-			draw("Player 1 is the winner with a score of ", normalFont, winWidth / 2 - textWidth / 2, winHeight / 2 - textHeight / 2, 255, 153, 51);
-			//TTF_SizeText(normalFont, score.c_str(), &textWidth, &textHeight);
-			draw(score.c_str(), normalFont, winWidth / 2 + textWidth / 2 + 10, winHeight / 2 - textHeight / 2, 0, 255, 0);
+			TTF_SizeText(normalFont, "Player 1 wins !!!", &textWidth, &textHeight);
+			draw("Player 1 wins !!!", normalFont, winWidth / 2 - textWidth / 2, winHeight / 2 - textHeight / 2, 255, 153, 51);
 		}
 		else if (score2 > score1) {
-			score = std::to_string(score2);
-			TTF_SizeText(normalFont, "Player 2 is the winner with a score of ", &textWidth, &textHeight);
-			draw("Player 2 is the winner with a score of ", normalFont, winWidth / 2 - textWidth / 2, winHeight / 2 - textHeight / 2, 51, 153, 255);
-			draw(score.c_str(), normalFont, winWidth / 2 + textWidth / 2 + 10, winHeight / 2 - textHeight / 2, 0, 255, 0);
+			TTF_SizeText(normalFont, "Player 2 wins !!!", &textWidth, &textHeight);
+			draw("Player 2 wins !!!", normalFont, winWidth / 2 - textWidth / 2, winHeight / 2 - textHeight / 2, 51, 153, 255);
 		}
 		else {
-			score = std::to_string(score2);
 			TTF_SizeText(normalFont, "Its a draw !!", &textWidth, &textHeight);
 			draw("Its a draw !!", normalFont, winWidth / 2 - textWidth / 2, winHeight / 2 - textHeight / 2, 255, 0, 0);
-			draw(score.c_str(), normalFont, winWidth / 2 + textWidth / 2, winHeight / 2 - textHeight / 2 + 20, 0, 255, 0);
 		}
-	}
-
-	//	Instructions
-	TTF_SizeText(instructionFont, "Press Q to end", &textWidth, &textHeight);
-	draw("Press Q to end", instructionFont, 0, winHeight - textHeight, 191, 191, 63);
-
-	TTF_SizeText(instructionFont, "Press ESC to close", &textWidth, &textHeight);
-	draw("Press ESC to close", instructionFont, winWidth - textWidth, winHeight - textHeight, 191, 191, 63);
-
-	//	Render the items
-	SDL_RenderPresent(ren);
-
-	if (!game) {
-		running = 0;
-		SDL_Delay(3000);
 	}
 }
 
@@ -215,23 +221,28 @@ void Pong::logic() {
 	if (ballX <= player1X + 21) {
 		if (ballY + 12 >= player1Y && ballY + 12 <= player1Y + 100) {
 			ball->changeDirection((eDir)((rand() % 3) + 4));
+			Mix_PlayChannel(-1, collideEffect, 0);
 		}
 	}
 
 	//right paddle
-	if (ballX + 40 >= player2X) {
+	if (ballX + 45 >= player2X) {
 		if (ballY + 12 >= player2Y && ballY + 12 <= player2Y + 100) {
 			ball->changeDirection((eDir)((rand() % 3) + 1));
+			Mix_PlayChannel(-1, collideEffect, 0);
 		}
 	}
 
 	//bottom wall
 	if (ballY >= winHeight - 20 - 25) {
 		ball->changeDirection(ball->getDirection() == eDir::DOWNRIGHT ? eDir::UPRIGHT : eDir::UPLEFT);
+		Mix_PlayChannel(-1, wallEffect, 0);
 	}
+
 	//top wall
-	if (ballY <= winHeight - 20 - gameHeight) {
+	if (ballY <= winHeight - gameHeight - 20) {
 		ball->changeDirection(ball->getDirection() == eDir::UPRIGHT ? eDir::DOWNRIGHT : eDir::DOWNLEFT);
+		Mix_PlayChannel(-1, wallEffect, 0);
 	}
 
 	//right wall 
@@ -243,7 +254,10 @@ void Pong::logic() {
 		ball->setDest(ball->getX(), ball->getY(), 25, 25);
 		player1->setDest(player1->getX() + 5, player1->getY(), 20, 100);
 		player2->setDest(player2->getX() - 25, player2->getY(), 20, 100);
+		Mix_HaltMusic();
+		Mix_PlayChannel(-1, loseEffect, 0);
 	}
+
 	//left wall 
 	if (ballX <= 0) {
 		scoreUp(player2);
@@ -253,6 +267,8 @@ void Pong::logic() {
 		ball->setDest(ball->getX(), ball->getY(), 25, 25);
 		player1->setDest(player1->getX() + 5, player1->getY(), 20, 100);
 		player2->setDest(player2->getX() - 25, player2->getY(), 20, 100);
+		Mix_HaltMusic();
+		Mix_PlayChannel(-1, loseEffect, 0);
 	}
 }
 
@@ -284,13 +300,14 @@ void Pong::input() {
 		//	On key press
 		if (event.type == SDL_KEYDOWN) {
 			if (event.key.keysym.sym == SDLK_ESCAPE) {
-				running = 0;
-				std::cout << "Quitting" << std::endl;
+				game = 0;
+				Mix_HaltMusic();
+				Mix_PlayChannel(-1, winnerEffect, 0);
 			}
 
 			//	Player 1 controls
 			if (event.key.keysym.sym == SDLK_w) {
-				if (player1->getY() > winHeight - gameHeight - 25) {
+				if (player1->getY() > winHeight - 10 - gameHeight) {
 					player1->moveUp();
 					player1->setDest(player1->getX() + 5, player1->getY(), 20, 100);
 				}
@@ -304,7 +321,7 @@ void Pong::input() {
 
 			//	Player 2 controls
 			if (event.key.keysym.sym == SDLK_UP) {
-				if (player2->getY() > winHeight - gameHeight - 25) {
+				if (player2->getY() > winHeight - 10 - gameHeight) {
 					player2->moveUp();
 					player2->setDest(player2->getX() - 25, player2->getY(), 20, 100);
 				}
@@ -316,15 +333,16 @@ void Pong::input() {
 				}
 			}
 
-			// On Q
-			if (event.key.keysym.sym == SDLK_q) {
-				game = 0;
-			}
-
 			//	ball randomize
 			if (event.key.keysym.sym == SDLK_RETURN) {
 				if (ball->getDirection() == eDir::STOP) {
 					ball->randomDirection();
+					if (!Mix_PlayingMusic()) {
+						Mix_PlayMusic(bgm, -1);
+					}
+					else if (Mix_PausedMusic()) {
+						Mix_ResumeMusic();
+					}
 				}
 			}
 		}

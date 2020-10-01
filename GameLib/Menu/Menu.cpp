@@ -1,15 +1,16 @@
 #include "Menu.h"
 
-Menu::Menu() {
-	if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
-		std::cout << "Failed at SDL_Init" << std::endl;
-	}
-	if (SDL_CreateWindowAndRenderer(800, 640, SDL_WINDOW_MAXIMIZED, &win, &ren) < 0) {
-		std::cout << "Failed at SDL_CreateWindowAndRenderer" << std::endl;
-	}
-	SDL_SetWindowTitle(win, "GameLib");
+Menu::Menu(SDL_Renderer* ren, SDL_Window* win) {
+	//	Initialize SDL
+	this->ren = ren;
+	this->win = win;
+	SDL_GetWindowSize(this->win, &winWidth, &winHeight);
 
-	SDL_GetWindowSize(win, &winWidth, &winHeight);
+	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
+		std::cout << "Failed at Mi_OpenAudio()" << std::endl;
+	}
+	clickEffect = Mix_LoadWAV("Audio/Click.wav");
+	startEffect = Mix_LoadWAV("Audio/Start.wav");
 
 	TTF_Init();
 	head = "GameLib";
@@ -24,13 +25,13 @@ Menu::Menu() {
 	running = 1;
 }
 Menu::~Menu() {
+	Mix_FreeChunk(clickEffect);
+	Mix_FreeChunk(startEffect);
+	Mix_Quit();
 	TTF_CloseFont(headFont);
 	TTF_CloseFont(questionFont);
 	TTF_CloseFont(optionFont);
 	TTF_Quit();
-	SDL_DestroyRenderer(ren);
-	SDL_DestroyWindow(win);
-	SDL_Quit();
 }
 int Menu::loop() {
 	vecString::iterator choice;
@@ -43,9 +44,11 @@ int Menu::loop() {
 	}
 }
 void Menu::render() {
-	SDL_SetRenderDrawColor(ren, 0, 0, 0, 255);
+	SDL_RenderClear(ren);
+
 	int textWidth, textHeight;
 
+	SDL_SetRenderDrawColor(ren, 0, 0, 0, 255);
 	SDL_Rect rect;
 	rect.w = winWidth;
 	rect.h = winHeight;
@@ -54,11 +57,11 @@ void Menu::render() {
 	SDL_RenderFillRect(ren, &rect);
 
 	//	Head Text
-	TTF_SizeText(headFont, head, &textWidth, NULL);
+	TTF_SizeText(headFont, head, &textWidth, &textHeight);
 	draw("GameLib", headFont, (winWidth / 2) - (textWidth / 2), 10, 255, 255, 0);
 
 	//	Question text
-	TTF_SizeText(questionFont, question, &textWidth, NULL);
+	TTF_SizeText(questionFont, question, &textWidth, &textHeight);
 	draw("What do you want to play ?", questionFont, (winWidth / 2) - (textWidth / 2), 100, 0, 0, 255);
 
 	//	Options Text
@@ -115,11 +118,14 @@ vecString::iterator Menu::input() {
 		if (event.type == SDL_KEYDOWN) {
 			if (event.key.keysym.sym == SDLK_UP) {
 				listOption = listOption == list.begin() ? list.end() - 1 : listOption - 1;
+				Mix_PlayChannel(-1, clickEffect, 0);
 			}
 			if (event.key.keysym.sym == SDLK_DOWN) {
 				listOption = listOption == list.end() - 1 ? list.begin() : listOption + 1;
+				Mix_PlayChannel(-1, clickEffect, 0);
 			}
 			if (event.key.keysym.sym == SDLK_RETURN) {
+				Mix_PlayChannel(-1, startEffect, 0);
 				return listOption;
 			}
 		}

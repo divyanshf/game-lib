@@ -5,6 +5,7 @@
 #include <SDL.h>
 #include <SDL_ttf.h>
 #include <SDL_image.h>
+#include <SDL_mixer.h>
 #include <vector>
 
 typedef std::vector <const char*> vecString;
@@ -15,13 +16,14 @@ private:
 	SDL_Renderer* ren;
 	SDL_Window* win;
 	int winWidth, winHeight;
+	Mix_Chunk* clickEffect, * startEffect;
 	TTF_Font* headFont, * questionFont, * optionFont;
 	const char* head, * question;
 	vecString list;
 	vecString::iterator listOption;
 	int running;
 public:
-	Menu();
+	Menu(SDL_Renderer* ren, SDL_Window* win);
 	~Menu();
 	int loop();
 	void render();
