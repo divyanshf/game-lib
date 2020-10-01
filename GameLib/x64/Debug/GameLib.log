@@ -1,2 +1,4 @@
-﻿  Pong.cpp
+﻿  Tic.cpp
+C:\Users\Dev\Desktop\GameLib\GameLib\Tic\Tic.cpp(95,61): warning C4244: '=': conversion from '__int64' to 'int', possible loss of data
+C:\Users\Dev\Desktop\GameLib\GameLib\Tic\Tic.cpp(107,17): warning C4101: 'textHeight': unreferenced local variable
   GameLib.vcxproj -> C:\Users\Dev\Desktop\GameLib\x64\Debug\GameLib.exe

@@ -6,6 +6,7 @@
 #include <vector>
 #include <SDL.h>
 #include <SDL_ttf.h>
+#include <SDL_mixer.h>
 #include "Ball.h"
 #include "Paddle.h"
 
@@ -17,6 +18,8 @@ private:
 	SDL_Renderer* ren;
 	SDL_Window* win;
 	TTF_Font* titleFont, * normalFont, * instructionFont;
+	Mix_Music* bgm;
+	Mix_Chunk* collideEffect, * loseEffect, * startEffect, * winnerEffect, * wallEffect;
 	int winWidth, winHeight;
 	const char* head;
 	int running, game;
@@ -28,13 +31,14 @@ private:
 	vecString pongOptions;
 	vecString::iterator pongOption;
 	void render();
+	void draw(int titleHeight);
 	void draw(Object obj);
 	void draw(const char* msg, TTF_Font* font, int x, int y, int r, int g, int b);
 	void logic();
 	void input();
 	void scoreUp(Paddle* player);
 public:
-	Pong();
+	Pong(SDL_Renderer* ren, SDL_Window* win);
 	~Pong();
 	void loop();
 };

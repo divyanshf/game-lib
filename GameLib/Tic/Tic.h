@@ -6,6 +6,7 @@
 #include <SDL.h>
 #include <SDL_ttf.h>
 #include <SDL_image.h>
+#include <SDL_mixer.h>
 #include "TicBoard.h"
 
 typedef std::vector <const char*> vecString;
@@ -16,6 +17,8 @@ private:
 	SDL_Renderer* ren;
 	SDL_Window* win;
 	TTF_Font* titleFont, * normalFont, * playerFont, * instructionFont;
+	Mix_Music* bgm;
+	Mix_Chunk* clickEffect, * loseEffect, * startEffect, * winnerEffect, * collideEffect;
 	TicBoard b;
 	Cord boardCords[3][3];
 	vecString ticOptions;
@@ -26,7 +29,7 @@ private:
 	int nPlayers;
 	int running;
 public:
-	Tic();
+	Tic(SDL_Renderer* ren, SDL_Window* win);
 	~Tic();
 	void ticMenu();
 	void inputMenu();

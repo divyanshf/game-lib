@@ -1,25 +1,26 @@
 #include "Tic.h"
 
 //	Tic Contstuctor
-Tic::Tic() : b("O", "X") {
+Tic::Tic(SDL_Renderer* ren, SDL_Window* win) : b("O", "X") {
 	//	Initialize SDL
-	if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
-		std::cout << "Failed at SDL_Init" << std::endl;
-	}
+	this->ren = ren;
+	this->win = win;
+	SDL_GetWindowSize(this->win, &winWidth, &winHeight);
 
-	//	Create window and renderer
-	if (SDL_CreateWindowAndRenderer(800, 640, SDL_WINDOW_FULLSCREEN, &win, &ren) < 0) {
-		std::cout << "Failed at SDL_CreateWindowAndRenderer" << std::endl;
-	}
-
-	//	Set window title
-	SDL_SetWindowTitle(win, "GameLib : Tic-Tac-Toe");
-
-	//	Set window size
-	SDL_GetWindowSize(win, &winWidth, &winHeight);
-	
 	//	Initialize TTF
 	TTF_Init();
+
+	//	Initialize audio
+	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
+		std::cout << "Failed at Mi_OpenAudio()" << std::endl;
+	}
+	Mix_VolumeMusic(5);
+	bgm = Mix_LoadMUS("Audio/Bgm.wav");
+	clickEffect = Mix_LoadWAV("Audio/Click.wav");
+	collideEffect = Mix_LoadWAV("Audio/Collide.wav");
+	loseEffect = Mix_LoadWAV("Audio/Lose.wav");
+	winnerEffect = Mix_LoadWAV("Audio/Win.wav");
+	startEffect = Mix_LoadWAV("Audio/Start.wav");
 
 	//	Initialize boardCords
 	for (int i = 0; i < 3; i++) {
@@ -48,13 +49,15 @@ Tic::Tic() : b("O", "X") {
 
 //	Tic destructor
 Tic::~Tic() {
+	Mix_FreeChunk(clickEffect);
+	Mix_FreeChunk(loseEffect);
+	Mix_FreeChunk(winnerEffect);
+	Mix_FreeMusic(bgm);
+	Mix_Quit();
 	TTF_CloseFont(titleFont);
 	TTF_CloseFont(normalFont);
 	TTF_CloseFont(playerFont);
 	TTF_Quit();
-	SDL_DestroyRenderer(ren);
-	SDL_DestroyWindow(win);
-	SDL_Quit();
 }
 
 //	Tic Menu 
@@ -82,13 +85,16 @@ void Tic::inputMenu() {
 		if (event.type == SDL_KEYDOWN) {
 			if (event.key.keysym.sym == SDLK_UP) {
 				ticOption = (ticOption == ticOptions.begin() ? ticOptions.end() - 1 : ticOption - 1);
+				Mix_PlayChannel(-1, clickEffect, 0);
 			}
 			if (event.key.keysym.sym == SDLK_DOWN) {
 				ticOption = (ticOption == ticOptions.end() - 1 ? ticOptions.begin() : ticOption + 1);
+				Mix_PlayChannel(-1, clickEffect, 0);
 			}
 			if (event.key.keysym.sym == SDLK_RETURN) {
 				nPlayers = std::distance(ticOptions.begin(), ticOption) + 1;
 				game = 0;
+				Mix_PlayChannel(-1, startEffect, 0);
 			}
 		}
 	}
@@ -96,10 +102,11 @@ void Tic::inputMenu() {
 
 //	Tic Menu render
 void Tic::renderMenu() {
-	SDL_SetRenderDrawColor(ren, 0, 0, 0, 255);
+	SDL_RenderClear(ren);
+
 	int textWidth, textHeight;
 
-	//	Background rect
+	SDL_SetRenderDrawColor(ren, 0, 0, 0, 255);
 	SDL_Rect rect;
 	rect.w = winWidth;
 	rect.h = winHeight;
@@ -132,6 +139,13 @@ void Tic::renderMenu() {
 //	Tic Loop
 void Tic::loop() {
 
+	if (!Mix_PlayingMusic()) {
+		Mix_PlayMusic(bgm, -1);
+	}
+	else if (Mix_PausedMusic()) {
+		Mix_ResumeMusic();
+	}
+
 	//	Two players
 	if (nPlayers == 2) {
 		while (running) {
@@ -156,10 +170,11 @@ void Tic::loop() {
 
 //	Tic render
 void Tic::render() {
-	SDL_SetRenderDrawColor(ren, 0, 0, 0, 255);
+	SDL_RenderClear(ren);
+
 	int textWidth, textHeight;
 
-	//	Background rectangle
+	SDL_SetRenderDrawColor(ren, 0, 0, 0, 255);
 	SDL_Rect rect;
 	rect.w = winWidth;
 	rect.h = winHeight;
@@ -184,6 +199,18 @@ void Tic::render() {
 	//	End game
 	if (game) {
 		running = 0;
+		Mix_HaltMusic();
+		if (nPlayers == 1) {
+			if (b.getResult() == "X") {
+				Mix_PlayChannel(-1, winnerEffect, 0);
+			}
+			else {
+				Mix_PlayChannel(-1, loseEffect, 0);
+			}
+		}
+		else {
+			Mix_PlayChannel(-1, winnerEffect, 0);
+		}
 		SDL_Delay(3000);
 	}
 }
@@ -277,6 +304,8 @@ void Tic::draw() {
 			draw(result, normalFont, winWidth / 2 - textWidth / 2, winHeight / 2 + 200, 0, 255, 0);
 		}
 	}
+
+	SDL_SetRenderDrawColor(ren, 0, 0, 0, SDL_ALPHA_OPAQUE);
 }
 
 //	Tic draw text
@@ -329,6 +358,7 @@ void Tic::input() {
 						if (event.motion.x > x - 50 && event.motion.x < x + 50) {
 							if (event.motion.y > y - 50 && event.motion.y < y + 50) {
 								game = b.humanMove(i, j);
+								Mix_PlayChannel(-1, clickEffect, 0);
 							}
 						}
 					}
