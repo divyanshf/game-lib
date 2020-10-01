@@ -1,7 +1,7 @@
 #ifndef PADDLE_H
 #define PADDLE_H
 
-#include "Object.h"
+#include "../Object/Object.h"
 
 class Paddle : public Object
 {

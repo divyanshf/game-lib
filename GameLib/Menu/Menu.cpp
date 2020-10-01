@@ -6,22 +6,32 @@ Menu::Menu(SDL_Renderer* ren, SDL_Window* win) {
 	this->win = win;
 	SDL_GetWindowSize(this->win, &winWidth, &winHeight);
 
+	//	Initialize Audio
 	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
 		std::cout << "Failed at Mi_OpenAudio()" << std::endl;
 	}
 	clickEffect = Mix_LoadWAV("Audio/Click.wav");
 	startEffect = Mix_LoadWAV("Audio/Start.wav");
 
+	//	Initialize TTF
 	TTF_Init();
 	head = "GameLib";
 	question = "What do you want to play ?";
 	headFont = TTF_OpenFont("Fonts/Chopsic/Chopsic-K6Dp.ttf", 48);
 	questionFont = TTF_OpenFont("Fonts/Montserrat/MontserratLight-ywBvq.ttf", 24);
 	optionFont = TTF_OpenFont("Fonts/Montserrat/MontserratLight-ywBvq.ttf", 18);
-	list.push_back("TIC-TAC-TOE");
-	list.push_back("PONG");
-	list.push_back("EXIT");
+
+	//	Initialize options
+	list.push_back(tupleStr("TIC-TAC-TOE", "Assets/GameImage/Tic.png"));
+	list.push_back(tupleStr("PONG", "Assets/GameImage/Pong.png"));
+	list.push_back(tupleStr("EXIT", "Assets/GameImage/Exit.png"));
 	listOption = list.begin();
+
+	//	Initialize gameImage
+	gameImage = new Object();
+	gameImage->setDest(1 + 25, 100 + 25, 150, 150);
+	gameImage->setImage(std::get<1>(*listOption), ren);
+	gameImage->setSource(0, 0, 200, 200);
 	running = 1;
 }
 Menu::~Menu() {
@@ -34,7 +44,7 @@ Menu::~Menu() {
 	TTF_Quit();
 }
 int Menu::loop() {
-	vecString::iterator choice;
+	vecTupleStr::iterator choice;
 	while (running) {
 		render();
 		choice = input();
@@ -43,6 +53,7 @@ int Menu::loop() {
 		}
 	}
 }
+
 void Menu::render() {
 	SDL_RenderClear(ren);
 
@@ -68,7 +79,7 @@ void Menu::render() {
 	int j = 0;
 	const char* arrow = "->";
 	const char* space = "  ";
-	for (vecString::iterator i = list.begin(); i != list.end(); i++) {
+	for (vecTupleStr::iterator i = list.begin(); i != list.end(); i++) {
 		char text[256];
 		int r = 255, g = 0, b = 0;
 		if (listOption == i) {
@@ -79,14 +90,29 @@ void Menu::render() {
 		else {
 			strcpy_s(text, space);
 		}
-		strcat_s(text, *i);
+		const char* tmp = std::get<0>(*i);
+		strcat_s(text, tmp);
 		TTF_SizeText(optionFont, text, NULL, &textHeight);
 		draw(text, optionFont, (winWidth / 2) - 50, 150 + j * (textHeight + 15), r, g, b);
 		j++;
 	}
 
+	//	TIC-TAC-TOE Lines
+	SDL_SetRenderDrawColor(ren, 255, 255, 255, SDL_ALPHA_OPAQUE);
+	SDL_RenderDrawLine(ren, 1, 100, 201, 100);
+	SDL_RenderDrawLine(ren, 1, 300, 201, 300);
+	SDL_RenderDrawLine(ren, 1, 100, 1, 300);
+	SDL_RenderDrawLine(ren, 201, 100, 201, 300);
+
+
+	//	Image
+	SDL_Rect dest = gameImage->getDest();
+	SDL_Rect src = gameImage->getSource();
+	SDL_RenderCopyEx(ren, gameImage->getTex(), &src, &dest, 0, NULL, SDL_FLIP_NONE);
+
 	SDL_RenderPresent(ren);
 }
+
 void Menu::draw(const char* msg, TTF_Font* font, int x, int y, int r, int g, int b) {
 	SDL_Surface* surfMsg;
 	SDL_Texture* texMsg;
@@ -106,22 +132,24 @@ void Menu::draw(const char* msg, TTF_Font* font, int x, int y, int r, int g, int
 	SDL_FreeSurface(surfMsg);
 	SDL_DestroyTexture(texMsg);
 }
-vecString::iterator Menu::input() {
+
+vecTupleStr::iterator Menu::input() {
 	SDL_Event event;
 	while (SDL_PollEvent(&event)) {
 		if (event.type == SDL_QUIT) {
 			running = 0;
-			std::cout << "Please Select the Exit Option : " << *(list.end() - 1) << std::endl;
 			listOption = list.end() - 1;
 			return listOption;
 		}
 		if (event.type == SDL_KEYDOWN) {
 			if (event.key.keysym.sym == SDLK_UP) {
 				listOption = listOption == list.begin() ? list.end() - 1 : listOption - 1;
+				gameImage->setImage(std::get<1>(*listOption), ren);
 				Mix_PlayChannel(-1, clickEffect, 0);
 			}
 			if (event.key.keysym.sym == SDLK_DOWN) {
 				listOption = listOption == list.end() - 1 ? list.begin() : listOption + 1;
+				gameImage->setImage(std::get<1>(*listOption), ren);
 				Mix_PlayChannel(-1, clickEffect, 0);
 			}
 			if (event.key.keysym.sym == SDLK_RETURN) {
