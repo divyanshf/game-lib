@@ -2,7 +2,7 @@
 #define BALL_H
 
 #include <cstdlib>
-#include "Object.h"
+#include "../Object/Object.h"
 
 enum class eDir {
 	STOP = 0,

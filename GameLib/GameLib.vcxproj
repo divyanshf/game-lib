@@ -149,13 +149,13 @@
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Menu\Menu.cpp" />
-    <ClCompile Include="Pong\Object.cpp" />
+    <ClCompile Include="Object\Object.cpp" />
     <ClCompile Include="Pong\Pong.cpp" />
     <ClCompile Include="Tic\Tic.cpp" />
     <ClCompile Include="Tic\TicBoard.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Pong\Object.h" />
+    <ClInclude Include="Object\Object.h" />
     <ClInclude Include="Pong\Ball.h" />
     <ClInclude Include="Menu\Menu.h" />
     <ClInclude Include="Pong\Paddle.h" />

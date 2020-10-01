@@ -122,9 +122,6 @@ void Pong::render() {
 	draw(score.c_str(), normalFont, winWidth - textWidth - 1, 50 + textHeight + 10, 0, 255, 0);
 
 	//	Instructions
-	TTF_SizeText(instructionFont, "Press Q to end", &textWidth, &textHeight);
-	draw("Press Q to end", instructionFont, 0, winHeight - textHeight, 191, 191, 63);
-
 	TTF_SizeText(instructionFont, "Press ESC to close", &textWidth, &textHeight);
 	draw("Press ESC to close", instructionFont, winWidth - textWidth, winHeight - textHeight, 191, 191, 63);
 
