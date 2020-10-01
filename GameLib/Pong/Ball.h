@@ -27,7 +27,7 @@ public:
 		originalY = posY;
 		x = posX;
 		y = posY;
-		speed = 1;
+		speed = 2;
 		direction = eDir::STOP;
 	}
 	void reset() {

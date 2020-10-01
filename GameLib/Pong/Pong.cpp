@@ -300,8 +300,9 @@ void Pong::input() {
 		//	On key press
 		if (event.type == SDL_KEYDOWN) {
 			if (event.key.keysym.sym == SDLK_ESCAPE) {
-				running = 0;
-				std::cout << "Quitting" << std::endl;
+				game = 0;
+				Mix_HaltMusic();
+				Mix_PlayChannel(-1, winnerEffect, 0);
 			}
 
 			//	Player 1 controls
@@ -330,13 +331,6 @@ void Pong::input() {
 					player2->moveDown();
 					player2->setDest(player2->getX() - 25, player2->getY(), 20, 100);
 				}
-			}
-
-			// On Q
-			if (event.key.keysym.sym == SDLK_q) {
-				game = 0;
-				Mix_HaltMusic();
-				Mix_PlayChannel(-1, winnerEffect, 0);
 			}
 
 			//	ball randomize
