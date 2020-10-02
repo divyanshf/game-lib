@@ -29,7 +29,7 @@ Menu::Menu(SDL_Renderer* ren, SDL_Window* win) {
 
 	//	Initialize gameImage
 	gameImage = new Object();
-	gameImage->setDest(1 + 25, 100 + 25, 150, 150);
+	gameImage->setDest(1 + 10, 100 + 10, 180, 180);
 	gameImage->setImage(std::get<1>(*listOption), ren);
 	gameImage->setSource(0, 0, 200, 200);
 	running = 1;
