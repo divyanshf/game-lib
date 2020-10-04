@@ -24,6 +24,7 @@ Menu::Menu(SDL_Renderer* ren, SDL_Window* win) {
 	//	Initialize options
 	list.push_back(tupleStr("TIC-TAC-TOE", "Assets/GameImage/Tic.png"));
 	list.push_back(tupleStr("PONG", "Assets/GameImage/Pong.png"));
+	list.push_back(tupleStr("HANGMAN", "Assets/GameImage/HangMan.png"));
 	list.push_back(tupleStr("EXIT", "Assets/GameImage/Exit.png"));
 	listOption = list.begin();
 

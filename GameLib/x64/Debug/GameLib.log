@@ -1,4 +1,4 @@
-﻿  Menu.cpp
-C:\Users\Dev\Desktop\GameLib\GameLib\Menu\Menu.cpp(52,24): warning C4244: 'return': conversion from '__int64' to 'int', possible loss of data
-C:\Users\Dev\Desktop\GameLib\GameLib\Menu\Menu.cpp(55): warning C4715: 'Menu::loop': not all control paths return a value
+﻿  Hang.cpp
+C:\Users\Dev\Desktop\GameLib\GameLib\Hangman\Hang.cpp(34,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\Dev\Desktop\GameLib\GameLib\Hangman\Hang.cpp(203,45): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
   GameLib.vcxproj -> C:\Users\Dev\Desktop\GameLib\x64\Debug\GameLib.exe
