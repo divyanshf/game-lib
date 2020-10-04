@@ -61,6 +61,8 @@ Pong::Pong(SDL_Renderer* ren, SDL_Window* win) {
 	player2->setSource(0, 0, 20, 100);
 
 	//	initialize additional variables
+	FPS = 120;
+	frameDelay = 1000 / FPS;
 	game = 1;
 	score1 = score2 = 0;
 	running = 1;
@@ -83,9 +85,17 @@ Pong::~Pong() {
 //	Pong Loop
 void Pong::loop() {
 	while (running) {
+		frameStart = SDL_GetTicks();
+
 		render();
 		input();
 		logic();
+
+		frameTime = SDL_GetTicks() - frameStart;
+
+		if (frameDelay > frameTime) {
+			SDL_Delay(frameDelay - frameTime);
+		}
 	}
 }
 

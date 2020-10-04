@@ -4,6 +4,7 @@
 #include "Menu/Menu.h"
 #include "Tic/Tic.h"
 #include "Pong/Pong.h"
+#include "Hangman/Hang.h"
 
 void runTic(SDL_Renderer* ren, SDL_Window* win) {
 	Tic obj(ren, win);
@@ -16,7 +17,13 @@ void runPong(SDL_Renderer* ren, SDL_Window* win) {
 	obj.loop();
 }
 
+void runHang(SDL_Renderer* ren, SDL_Window* win) {
+	Hang obj(ren, win);
+	obj.loop();
+}
+
 int main() {
+	int window = 1;
 	SDL_Renderer* ren;
 	SDL_Window* win;
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
@@ -26,7 +33,7 @@ int main() {
 		std::cout << "Failed at SDL_CreateWindowAndRenderer" << std::endl;
 	}
 	SDL_SetWindowTitle(win, "GameLib");
-	while (1) {
+	while (window) {
 		Menu m(ren, win);
 		int choice = m.loop();
 		switch (choice) {
@@ -37,7 +44,10 @@ int main() {
 			runPong(ren, win);
 			break;
 		case 2:
-			exit(0);
+			runHang(ren, win);
+			break;
+		case 3:
+			window = 0;
 			break;
 		}
 	}

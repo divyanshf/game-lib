@@ -148,6 +148,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="Hangman\Hang.cpp" />
     <ClCompile Include="Menu\Menu.cpp" />
     <ClCompile Include="Object\Object.cpp" />
     <ClCompile Include="Pong\Pong.cpp" />
@@ -155,6 +156,7 @@
     <ClCompile Include="Tic\TicBoard.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Hangman\Hang.h" />
     <ClInclude Include="Object\Object.h" />
     <ClInclude Include="Pong\Ball.h" />
     <ClInclude Include="Menu\Menu.h" />

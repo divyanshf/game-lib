@@ -18,6 +18,9 @@ private:
 	SDL_Renderer* ren;
 	SDL_Window* win;
 	TTF_Font* titleFont, * normalFont, * instructionFont;
+	int FPS;
+	int frameDelay, frameTime;
+	Uint32 frameStart;
 	Mix_Music* bgm;
 	Mix_Chunk* collideEffect, * loseEffect, * startEffect, * winnerEffect, * wallEffect;
 	int winWidth, winHeight;
