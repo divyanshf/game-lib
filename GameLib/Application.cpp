@@ -29,7 +29,7 @@ int main() {
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
 		std::cout << "Failed at SDL_Init" << std::endl;
 	}
-	if (SDL_CreateWindowAndRenderer(1024, 720, SDL_WINDOW_FULLSCREEN, &win, &ren) < 0) {
+	if (SDL_CreateWindowAndRenderer(1024, 720, 0, &win, &ren) < 0) {
 		std::cout << "Failed at SDL_CreateWindowAndRenderer" << std::endl;
 	}
 	SDL_SetWindowTitle(win, "GameLib");

@@ -18,8 +18,9 @@ Pong::Pong(SDL_Renderer* ren, SDL_Window* win) {
 
 	//	Initialize audio
 	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
-		std::cout << "Failed at Mi_OpenAudio()" << std::endl;
+		std::cout << "Failed at Mix_OpenAudio()" << std::endl;
 	}
+	Mix_Volume(-1, 100);
 	Mix_VolumeMusic(5);
 	bgm = Mix_LoadMUS("Audio/Bgm.wav");
 	collideEffect = Mix_LoadWAV("Audio/Collide.wav");
@@ -27,6 +28,9 @@ Pong::Pong(SDL_Renderer* ren, SDL_Window* win) {
 	winnerEffect = Mix_LoadWAV("Audio/Win.wav");
 	startEffect = Mix_LoadWAV("Audio/Start.wav");
 	wallEffect = Mix_LoadWAV("Audio/Click.wav");
+	volume.setDest(winWidth - 25, 0, 25, 25);
+	volume.setImage("Assets/GameImage/Volume.png", ren);
+	volume.setSource(0, 0, 50, 50);
 
 	//	Initialize options
 	pongOptions.push_back("1");
@@ -41,9 +45,6 @@ Pong::Pong(SDL_Renderer* ren, SDL_Window* win) {
 	ball = new Ball(gameWidth / 2, (winHeight - 20) - gameHeight / 2 - 12);
 	player1 = new Paddle(1, (winHeight - 20) - gameHeight / 2 - 50);
 	player2 = new Paddle(gameWidth - 1, (winHeight - 20) - gameHeight / 2 - 50);
-
-	std::cout << (player1->getX()) << std::endl;
-	std::cout << (player2->getX()) << std::endl;
 
 	//	Set src for ball
 	ball->setDest(ball->getX(), ball->getY(), 25, 25);
@@ -60,10 +61,28 @@ Pong::Pong(SDL_Renderer* ren, SDL_Window* win) {
 	player2->setImage("Assets/Pong/paddle.png", ren);
 	player2->setSource(0, 0, 20, 100);
 
+	//	Best scores from file
+	scoreFileName = "Assets/User/Pong.txt";
+	scoreFile.open(scoreFileName, std::fstream::in);
+	if (!scoreFile) {
+		scoreFile.open(scoreFileName, std::fstream::out);
+		scoreFile << "0" << std::endl;
+		scoreFile.close();
+		bestScore = 0;
+	}
+	else {
+		std::string tmpScore;
+		scoreFile >> tmpScore;
+		bestScore = std::stoi(tmpScore);
+		scoreFile.close();
+	}
+
+
 	//	initialize additional variables
 	FPS = 120;
 	frameDelay = 1000 / FPS;
 	game = 1;
+	isMute = false;
 	score1 = score2 = 0;
 	running = 1;
 }
@@ -154,10 +173,10 @@ void Pong::draw(int titleHeight) {
 	SDL_SetRenderDrawColor(ren, 255, 255, 255, SDL_ALPHA_OPAQUE);
 
 	//	Draw the borders
-	SDL_RenderDrawLine(ren, 0, textHeight + 100, winWidth - 1, textHeight + 100);
+	SDL_RenderDrawLine(ren, 0, titleHeight + 100, winWidth - 1, titleHeight + 100);
 	SDL_RenderDrawLine(ren, 0, winHeight - 20, winWidth - 1, winHeight - 20);
-	SDL_RenderDrawLine(ren, 0, textHeight + 100, 0, winHeight - 20);
-	SDL_RenderDrawLine(ren, winWidth - 1, textHeight + 100, winWidth - 1, winHeight - 20);
+	SDL_RenderDrawLine(ren, 0, titleHeight + 100, 0, winHeight - 20);
+	SDL_RenderDrawLine(ren, winWidth - 1, titleHeight + 100, winWidth - 1, winHeight - 20);
 
 	//	Buttons
 	if (game) {
@@ -187,6 +206,14 @@ void Pong::draw(int titleHeight) {
 			draw("Its a draw !!", normalFont, winWidth / 2 - textWidth / 2, winHeight / 2 - textHeight / 2, 255, 0, 0);
 		}
 	}
+
+	//	Best Score
+	std::string targetScore = "Best : " + std::to_string(bestScore);
+	TTF_SizeText(instructionFont, targetScore.c_str(), &textWidth, &textHeight);
+	draw(targetScore.c_str(), instructionFont, 0, 0, 0, 0, 255);
+
+	//	Volute button
+	draw(volume);
 }
 
 void Pong::draw(Object obj) {
@@ -216,6 +243,7 @@ void Pong::draw(const char* msg, TTF_Font* font, int x, int y, int r, int g, int
 	SDL_DestroyTexture(texMsg);
 }
 
+//	Pong logic
 void Pong::logic() {
 	int ballX = ball->getX();
 	int ballY = ball->getY();
@@ -279,18 +307,36 @@ void Pong::logic() {
 	}
 }
 
+//	Pong score up
 void Pong::scoreUp(Paddle* player) {
 	if (player == player1) {
 		score1 += 10;
+		if (score1 > bestScore) {
+			bestScore = score1;
+			std::string tmpScore = std::to_string(bestScore);
+			scoreFile.open(scoreFileName, std::fstream::out | std::fstream::trunc);
+			scoreFile << tmpScore.c_str() << std::endl;
+			scoreFile.close();
+			std::cout << "Updated bestScore" << std::endl;
+		}
 	}
 	else if (player == player2) {
 		score2 += 10;
+		if (score2 > bestScore) {
+			bestScore = score2;
+			std::string tmpScore = std::to_string(bestScore);
+			scoreFile.open(scoreFileName, std::fstream::out | std::fstream::trunc);
+			scoreFile << tmpScore.c_str() << std::endl;
+			scoreFile.close();
+			std::cout << "Updated bestScore" << std::endl;
+		}
 	}
 	ball->reset();
 	player1->reset();
 	player2->reset();
 }
 
+//	Pong input
 void Pong::input() {
 	ball->move();
 	ball->setDest(ball->getX(), ball->getY(), 25, 25);
@@ -304,12 +350,46 @@ void Pong::input() {
 			std::cout << "Quitting" << std::endl;
 		}
 
+		//	On mouse click
+		if (event.type == SDL_MOUSEBUTTONDOWN) {
+			if (event.motion.x > winWidth - 30 && event.motion.x < winWidth) {
+				if (event.motion.y > 0 && event.motion.y < 30) {
+					if (isMute) {
+						Mix_Volume(-1, 100);
+						Mix_VolumeMusic(5);
+						volume.setSource(0, 0, 50, 50);
+					}
+					else {
+						Mix_Volume(-1, 0);
+						Mix_VolumeMusic(0);
+						volume.setSource(50, 0, 50, 50);
+					}
+					isMute = !isMute;
+				}
+			}
+		}
+
 		//	On key press
 		if (event.type == SDL_KEYDOWN) {
 			if (event.key.keysym.sym == SDLK_ESCAPE) {
 				game = 0;
 				Mix_HaltMusic();
 				Mix_PlayChannel(-1, winnerEffect, 0);
+			}
+
+			//	Mute toggle
+			if (event.key.keysym.sym == SDLK_m) {
+				if (isMute) {
+					Mix_Volume(-1, 100);
+					Mix_VolumeMusic(5);
+					volume.setSource(0, 0, 50, 50);
+				}
+				else {
+					Mix_Volume(-1, 0);
+					Mix_VolumeMusic(0);
+					volume.setSource(50, 0, 50, 50);
+				}
+				isMute = !isMute;
 			}
 
 			//	Player 1 controls

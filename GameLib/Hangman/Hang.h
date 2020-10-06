@@ -22,6 +22,8 @@ private:
 	TTF_Font* titleFont, * normalFont, * playerFont, * instructionFont;
 	Mix_Music* bgm;
 	Mix_Chunk* clickEffect, * loseEffect, * winnerEffect, *thankEffect, *screamEffect, *errorEffect;
+	Object volume;
+	bool isMute; 
 	int winWidth, winHeight;
 	int FPS;
 	int frameDelay, frameTime;
@@ -36,10 +38,6 @@ private:
 	int chances;
 	const char* head;
 	int running;
-public:
-	Hang(SDL_Renderer* ren, SDL_Window* win);
-	~Hang();
-	void loop();
 	void render();
 	void draw();
 	void draw(Object obj);
@@ -47,6 +45,10 @@ public:
 	int getWinner();
 	void updateAnimation();
 	void input();
+public:
+	Hang(SDL_Renderer* ren, SDL_Window* win);
+	~Hang();
+	void loop();
 };
 
 #endif // !HANG_H

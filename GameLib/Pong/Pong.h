@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <fstream>
 #include <SDL.h>
 #include <SDL_ttf.h>
 #include <SDL_mixer.h>
@@ -23,6 +24,8 @@ private:
 	Uint32 frameStart;
 	Mix_Music* bgm;
 	Mix_Chunk* collideEffect, * loseEffect, * startEffect, * winnerEffect, * wallEffect;
+	Object volume;
+	bool isMute;
 	int winWidth, winHeight;
 	const char* head;
 	int running, game;
@@ -30,7 +33,9 @@ private:
 	Ball* ball;
 	Paddle* player1;
 	Paddle* player2;
-	int score1, score2;
+	int score1, score2, bestScore;
+	std::fstream scoreFile;
+	const char* scoreFileName;
 	vecString pongOptions;
 	vecString::iterator pongOption;
 	void render();

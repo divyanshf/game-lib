@@ -14,6 +14,7 @@ Hang::Hang(SDL_Renderer* ren, SDL_Window* win) {
 	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
 		std::cout << "Failed at Mi_OpenAudio()" << std::endl;
 	}
+	Mix_Volume(-1, 100);
 	Mix_VolumeMusic(5);
 	bgm = Mix_LoadMUS("Audio/HangBgm.wav");
 	clickEffect = Mix_LoadWAV("Audio/Click.wav");
@@ -22,6 +23,9 @@ Hang::Hang(SDL_Renderer* ren, SDL_Window* win) {
 	winnerEffect = Mix_LoadWAV("Audio/Win.wav");
 	screamEffect = Mix_LoadWAV("Audio/Scream3.wav");
 	errorEffect = Mix_LoadWAV("Audio/Error.wav");
+	volume.setDest(winWidth - 25, 0, 25, 25);
+	volume.setImage("Assets/GameImage/Volume.png", ren);
+	volume.setSource(0, 0, 50, 50);
 
 	//	Initialize title and fonts
 	head = "HANGMAN";
@@ -40,6 +44,8 @@ Hang::Hang(SDL_Renderer* ren, SDL_Window* win) {
 		}
 	}
 	word = words[(rand() % 61333)];
+	int nTmpGuess = rand() % word.length();
+	guess += (word[nTmpGuess]);
 
 	//	Chances
 	chances = 5;
@@ -51,11 +57,14 @@ Hang::Hang(SDL_Renderer* ren, SDL_Window* win) {
 	anim.setImage("Assets/Hangman/Anim.png", ren);
 	anim.setSource(0, 0, 500, 500);
 	winner = -1;
-	guess = "";
+	isMute = false;
 	game = 1;
 	running = 1;
 }
+
+//	Hang Destructor
 Hang::~Hang() {
+	file.close();
 	Mix_FreeChunk(clickEffect);
 	Mix_FreeChunk(loseEffect);
 	Mix_FreeChunk(winnerEffect);
@@ -69,6 +78,8 @@ Hang::~Hang() {
 	SDL_StopTextInput();
 	TTF_Quit();
 }
+
+//	Hang main loop
 void Hang::loop() {
 	Mix_PlayMusic(bgm, -1);
 	while (running) {
@@ -109,6 +120,8 @@ void Hang::loop() {
 		SDL_Delay(4000);
 	}
 }
+
+//	Hang update animation
 void Hang::updateAnimation() {
 	game--;
 	SDL_Rect tmpRect;
@@ -124,6 +137,8 @@ void Hang::updateAnimation() {
 		anim.setSource(tmpRect.x + 500, tmpRect.y, 500, 500);
 	}
 }
+
+//	Hang render
 void Hang::render() {
 	SDL_RenderClear(ren);
 
@@ -162,6 +177,8 @@ void Hang::render() {
 
 	SDL_RenderPresent(ren);
 }
+
+//	Hang draw
 void Hang::draw() {
 	int textHeight, textWidth;
 	int spaceWidth, spaceHeight;
@@ -262,12 +279,18 @@ void Hang::draw() {
 	TTF_SizeText(instructionFont, "Press ESC to close", &textWidth, &textHeight);
 	draw("Press ESC to close", instructionFont, winWidth - textWidth, winHeight - textHeight, 191, 191, 63);
 
+	//	Mute button
+	draw(volume);
 }
+
+//	Hang draw object
 void Hang::draw(Object obj) {
 	SDL_Rect dest = obj.getDest();
 	SDL_Rect src = obj.getSource();
 	SDL_RenderCopyEx(ren, obj.getTex(), &src, &dest, 0, NULL, SDL_FLIP_NONE);
 }
+
+//	Hang draw text
 void Hang::draw(const char* msg, TTF_Font* font, int x, int y, int r, int g, int b) {
 	SDL_Surface* surfMsg;
 	SDL_Texture* texMsg;
@@ -287,6 +310,8 @@ void Hang::draw(const char* msg, TTF_Font* font, int x, int y, int r, int g, int
 	SDL_FreeSurface(surfMsg);
 	SDL_DestroyTexture(texMsg);
 }
+
+//	Hang get winner
 int Hang::getWinner() {
 	for (int i = 0; i < word.length(); i++) {
 		if (guess.find(word[i]) == std::string::npos) {
@@ -303,6 +328,8 @@ int Hang::getWinner() {
 	anim.setSource(500, 500, 500, 500);
 	return 1;
 }
+
+//	Hang input
 void Hang::input() {
 	SDL_Event event;
 	while (SDL_PollEvent(&event)) {
@@ -318,6 +345,25 @@ void Hang::input() {
 			if (event.key.keysym.sym == SDLK_ESCAPE) {
 				running = 0;
 				game = 0;
+			}
+		}
+
+		//	On mouse click
+		if (event.type == SDL_MOUSEBUTTONDOWN) {
+			if (event.motion.x > winWidth - 30 && event.motion.x < winWidth) {
+				if (event.motion.y > 0 && event.motion.y < 30) {
+					if (isMute) {
+						Mix_Volume(-1, 100);
+						Mix_VolumeMusic(5);
+						volume.setSource(0, 0, 50, 50);
+					}
+					else {
+						Mix_Volume(-1, 0);
+						Mix_VolumeMusic(0);
+						volume.setSource(50, 0, 50, 50);
+					}
+					isMute = !isMute;
+				}
 			}
 		}
 
