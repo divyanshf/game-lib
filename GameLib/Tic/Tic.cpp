@@ -14,13 +14,16 @@ Tic::Tic(SDL_Renderer* ren, SDL_Window* win) : b("O", "X") {
 	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
 		std::cout << "Failed at Mi_OpenAudio()" << std::endl;
 	}
-	Mix_VolumeMusic(5);
-	bgm = Mix_LoadMUS("Audio/Bgm.wav");
+	Mix_Volume(-1, 100);
+	Mix_VolumeMusic(5);	bgm = Mix_LoadMUS("Audio/Bgm.wav");
 	clickEffect = Mix_LoadWAV("Audio/Click.wav");
 	collideEffect = Mix_LoadWAV("Audio/Collide.wav");
 	loseEffect = Mix_LoadWAV("Audio/Lose.wav");
 	winnerEffect = Mix_LoadWAV("Audio/Win.wav");
 	startEffect = Mix_LoadWAV("Audio/Start.wav");
+	volume.setDest(winWidth - 25, 0, 25, 25);
+	volume.setImage("Assets/GameImage/Volume.png", ren);
+	volume.setSource(0, 0, 50, 50);
 
 	//	Initialize boardCords
 	for (int i = 0; i < 3; i++) {
@@ -42,6 +45,7 @@ Tic::Tic(SDL_Renderer* ren, SDL_Window* win) : b("O", "X") {
 	instructionFont = TTF_OpenFont("Fonts/Montserrat/MontserratLight-ywBvq.ttf", 16);
 
 	//	Initialize remaining variables
+	isMute = false;
 	nPlayers = 1;
 	game = 1;
 	running = 1;
@@ -188,6 +192,9 @@ void Tic::render() {
 
 	//	Board and players
 	draw();
+
+	//	Mute button
+	draw(volume);
 	
 	//	Instructions
 	TTF_SizeText(instructionFont, "Press ESC to close", &textWidth, &textHeight);
@@ -213,6 +220,13 @@ void Tic::render() {
 		}
 		SDL_Delay(3000);
 	}
+}
+
+//	Tic draw object
+void Tic::draw(Object obj) {
+	SDL_Rect dest = obj.getDest();
+	SDL_Rect src = obj.getSource();
+	SDL_RenderCopyEx(ren, obj.getTex(), &src, &dest, 0, NULL, SDL_FLIP_NONE);
 }
 
 //	Tic draw 
@@ -346,6 +360,19 @@ void Tic::input() {
 				running = 0;
 				std::cout << "Quitting" << std::endl;
 			}
+			if (event.key.keysym.sym == SDLK_m) {
+				if (isMute) {
+					Mix_Volume(-1, 100);
+					Mix_VolumeMusic(5);
+					volume.setSource(0, 0, 50, 50);
+				}
+				else {
+					Mix_Volume(-1, 0);
+					Mix_VolumeMusic(0);
+					volume.setSource(50, 0, 50, 50);
+				}
+				isMute = !isMute;
+			}
 		}
 
 		//	On mouse click
@@ -362,6 +389,21 @@ void Tic::input() {
 							}
 						}
 					}
+				}
+			}
+			if (event.motion.x > winWidth - 30 && event.motion.x < winWidth) {
+				if (event.motion.y > 0 && event.motion.y < 30) {
+					if (isMute) {
+						Mix_Volume(-1, 100);
+						Mix_VolumeMusic(5);
+						volume.setSource(0, 0, 50, 50);
+					}
+					else {
+						Mix_Volume(-1, 0);
+						Mix_VolumeMusic(0);
+						volume.setSource(50, 0, 50, 50);
+					}
+					isMute = !isMute;
 				}
 			}
 		}
