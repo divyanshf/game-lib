@@ -1,9 +1,2 @@
-﻿  Hang.cpp
-C:\Users\Dev\Desktop\GameLib\GameLib\Hangman\Hang.cpp(38,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\Dev\Desktop\GameLib\GameLib\Hangman\Hang.cpp(220,45): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-  Pong.cpp
-  Tic.cpp
-C:\Users\Dev\Desktop\GameLib\GameLib\Tic\Tic.cpp(99,61): warning C4244: '=': conversion from '__int64' to 'int', possible loss of data
-C:\Users\Dev\Desktop\GameLib\GameLib\Tic\Tic.cpp(111,17): warning C4101: 'textHeight': unreferenced local variable
-  Generating Code...
+﻿  Application.cpp
   GameLib.vcxproj -> C:\Users\Dev\Desktop\GameLib\x64\Debug\GameLib.exe
