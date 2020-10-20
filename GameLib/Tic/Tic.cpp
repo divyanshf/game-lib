@@ -1,10 +1,11 @@
 #include "Tic.h"
 
 //	Tic Contstuctor
-Tic::Tic(SDL_Renderer* ren, SDL_Window* win) : b("O", "X") {
+Tic::Tic(SDL_Renderer* ren, SDL_Window* win, std::string username) : b("O", "X") {
 	//	Initialize SDL
 	this->ren = ren;
 	this->win = win;
+	this->username = username;
 	SDL_GetWindowSize(this->win, &winWidth, &winHeight);
 
 	//	Initialize TTF
@@ -199,6 +200,12 @@ void Tic::render() {
 	//	Instructions
 	TTF_SizeText(instructionFont, "Press ESC to close", &textWidth, &textHeight);
 	draw("Press ESC to close", instructionFont, winWidth - textWidth, winHeight - textHeight, 191, 191, 63);
+	
+	//	Username
+	int tmpW, tmpH;
+	TTF_SizeText(instructionFont, "User : ", &tmpW, &tmpH);
+	draw("User : ", instructionFont, 0, winHeight - tmpH, 255, 255, 0);
+	draw(username.c_str(), instructionFont, tmpW, winHeight - tmpH, 0, 255, 0);
 
 	//	Render the items
 	SDL_RenderPresent(ren);

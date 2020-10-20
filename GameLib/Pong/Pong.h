@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <fstream>
+#include <sstream>
 #include <SDL.h>
 #include <SDL_ttf.h>
 #include <SDL_mixer.h>
@@ -38,6 +39,7 @@ private:
 	const char* scoreFileName;
 	vecString pongOptions;
 	vecString::iterator pongOption;
+	std::string username;
 	void render();
 	void draw(int titleHeight);
 	void draw(Object obj);
@@ -46,7 +48,7 @@ private:
 	void input();
 	void scoreUp(Paddle* player);
 public:
-	Pong(SDL_Renderer* ren, SDL_Window* win);
+	Pong(SDL_Renderer* ren, SDL_Window* win, std::string username);
 	~Pong();
 	void loop();
 };

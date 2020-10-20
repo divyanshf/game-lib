@@ -1,9 +1,10 @@
 #include "Menu.h"
 
-Menu::Menu(SDL_Renderer* ren, SDL_Window* win) {
+Menu::Menu(SDL_Renderer* ren, SDL_Window* win, std::string username) {
 	//	Initialize SDL
 	this->ren = ren;
 	this->win = win;
+	this->username = username;
 	SDL_GetWindowSize(this->win, &winWidth, &winHeight);
 
 	//	Initialize Audio
@@ -20,11 +21,13 @@ Menu::Menu(SDL_Renderer* ren, SDL_Window* win) {
 	headFont = TTF_OpenFont("Fonts/Chopsic/Chopsic-K6Dp.ttf", 48);
 	questionFont = TTF_OpenFont("Fonts/Montserrat/MontserratLight-ywBvq.ttf", 24);
 	optionFont = TTF_OpenFont("Fonts/Montserrat/MontserratLight-ywBvq.ttf", 18);
+	instructionFont = TTF_OpenFont("Fonts/Montserrat/MontserratLight-ywBvq.ttf", 16);
 
 	//	Initialize options
 	list.push_back(tupleStr("TIC-TAC-TOE", "Assets/GameImage/Tic.png"));
 	list.push_back(tupleStr("PONG", "Assets/GameImage/Pong.png"));
 	list.push_back(tupleStr("HANGMAN", "Assets/GameImage/HangMan.png"));
+	list.push_back(tupleStr("SNAKE", "Assets/GameImage/Snake.png"));
 	list.push_back(tupleStr("EXIT", "Assets/GameImage/Exit.png"));
 	listOption = list.begin();
 
@@ -44,6 +47,7 @@ Menu::~Menu() {
 	TTF_CloseFont(optionFont);
 	TTF_Quit();
 }
+
 int Menu::loop() {
 	vecTupleStr::iterator choice;
 	while (running) {
@@ -70,7 +74,7 @@ void Menu::render() {
 
 	//	Head Text
 	TTF_SizeText(headFont, head, &textWidth, &textHeight);
-	draw("GameLib", headFont, (winWidth / 2) - (textWidth / 2), 10, 255, 255, 0);
+	draw(head, headFont, (winWidth / 2) - (textWidth / 2), 10, 255, 255, 0);
 
 	//	Question text
 	TTF_SizeText(questionFont, question, &textWidth, &textHeight);
@@ -105,11 +109,16 @@ void Menu::render() {
 	SDL_RenderDrawLine(ren, 1, 100, 1, 300);
 	SDL_RenderDrawLine(ren, 201, 100, 201, 300);
 
-
 	//	Image
 	SDL_Rect dest = gameImage->getDest();
 	SDL_Rect src = gameImage->getSource();
 	SDL_RenderCopyEx(ren, gameImage->getTex(), &src, &dest, 0, NULL, SDL_FLIP_NONE);
+
+	//	Username
+	int tmpW, tmpH;
+	TTF_SizeText(instructionFont, "User : ", &tmpW, &tmpH);
+	draw("User : ", instructionFont, 0, winHeight - tmpH, 255, 255, 0);
+	draw(username.c_str(), instructionFont, tmpW, winHeight - tmpH, 0, 255, 0);
 
 	SDL_RenderPresent(ren);
 }

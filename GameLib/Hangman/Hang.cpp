@@ -1,9 +1,10 @@
 #include "Hang.h"
 
-Hang::Hang(SDL_Renderer* ren, SDL_Window* win) {
+Hang::Hang(SDL_Renderer* ren, SDL_Window* win, std::string username) {
 	//	Initialize SDL
 	this->ren = ren;
 	this->win = win;
+	this->username = username;
 	SDL_GetWindowSize(this->win, &winWidth, &winHeight);
 
 	//	Initialize TTF
@@ -174,6 +175,12 @@ void Hang::render() {
 	draw(anim);
 
 	SDL_SetRenderDrawColor(ren, 255, 255, 255, 255);
+
+	//	Username
+	int tmpW, tmpH;
+	TTF_SizeText(instructionFont, "User : ", &tmpW, &tmpH);
+	draw("User : ", instructionFont, 0, winHeight - tmpH, 255, 255, 0);
+	draw(username.c_str(), instructionFont, tmpW, winHeight - tmpH, 0, 255, 0);
 
 	SDL_RenderPresent(ren);
 }
