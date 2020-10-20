@@ -20,14 +20,15 @@ private:
 	SDL_Window* win;
 	int winWidth, winHeight;
 	Mix_Chunk* clickEffect, * startEffect;
-	TTF_Font* headFont, * questionFont, * optionFont;
+	TTF_Font* headFont, * questionFont, * optionFont, *instructionFont;
 	const char* head, * question;
 	vecTupleStr list;
 	vecTupleStr::iterator listOption;
 	Object* gameImage;
 	int running;
+	std::string username;
 public:
-	Menu(SDL_Renderer* ren, SDL_Window* win);
+	Menu(SDL_Renderer* ren, SDL_Window* win, std::string username);
 	~Menu();
 	int loop();
 	void render();

@@ -1,10 +1,11 @@
 #include "Pong.h"
 
 //	Pong Constructor
-Pong::Pong(SDL_Renderer* ren, SDL_Window* win) {
+Pong::Pong(SDL_Renderer* ren, SDL_Window* win, std::string username) {
 	//	Initialize SDL
 	this->ren = ren;
 	this->win = win;
+	this->username = username;
 	SDL_GetWindowSize(this->win, &winWidth, &winHeight);
 
 	//	Initialize TTF
@@ -62,13 +63,14 @@ Pong::Pong(SDL_Renderer* ren, SDL_Window* win) {
 	player2->setSource(0, 0, 20, 100);
 
 	//	Best scores from file
-	scoreFileName = "Assets/User/Pong.txt";
+	std::string tmpFile = "Assets/User/" + username + "/Pong.txt";
+	scoreFileName = tmpFile.c_str();
 	scoreFile.open(scoreFileName, std::fstream::in);
 	if (!scoreFile) {
 		scoreFile.open(scoreFileName, std::fstream::out);
+		bestScore = 0;
 		scoreFile << "0" << std::endl;
 		scoreFile.close();
-		bestScore = 0;
 	}
 	else {
 		std::string tmpScore;
@@ -155,6 +157,13 @@ void Pong::render() {
 	draw("Press ESC to close", instructionFont, winWidth - textWidth, winHeight - textHeight, 191, 191, 63);
 
 	SDL_SetRenderDrawColor(ren, 0, 0, 0, 255);
+
+	//	Username
+	int tmpW, tmpH;
+	TTF_SizeText(instructionFont, "User : ", &tmpW, &tmpH);
+	draw("User : ", instructionFont, 0, winHeight - tmpH, 255, 255, 0);
+	draw(username.c_str(), instructionFont, tmpW, winHeight - tmpH, 0, 255, 0);
+
 	//	Render the items
 	SDL_RenderPresent(ren);
 

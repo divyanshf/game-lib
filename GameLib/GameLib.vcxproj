@@ -152,8 +152,10 @@
     <ClCompile Include="Menu\Menu.cpp" />
     <ClCompile Include="Object\Object.cpp" />
     <ClCompile Include="Pong\Pong.cpp" />
+    <ClCompile Include="Snake\Snake.cpp" />
     <ClCompile Include="Tic\Tic.cpp" />
     <ClCompile Include="Tic\TicBoard.cpp" />
+    <ClCompile Include="User\User.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Hangman\Hang.h" />
@@ -162,8 +164,10 @@
     <ClInclude Include="Menu\Menu.h" />
     <ClInclude Include="Pong\Paddle.h" />
     <ClInclude Include="Pong\Pong.h" />
+    <ClInclude Include="Snake\Snake.h" />
     <ClInclude Include="Tic\Tic.h" />
     <ClInclude Include="Tic\TicBoard.h" />
+    <ClInclude Include="User\User.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -31,6 +31,7 @@ private:
 	const char* head;
 	int nPlayers;
 	int running;
+	std::string username;
 	void inputMenu();
 	void renderMenu();
 	void render();
@@ -39,7 +40,7 @@ private:
 	void draw(const char* msg, TTF_Font* font, int x, int y, int r, int g, int b);
 	void input();
 public:
-	Tic(SDL_Renderer* ren, SDL_Window* win);
+	Tic(SDL_Renderer* ren, SDL_Window* win, std::string username);
 	~Tic();
 	void ticMenu();
 	void loop();

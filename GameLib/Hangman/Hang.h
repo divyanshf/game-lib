@@ -38,6 +38,7 @@ private:
 	int chances;
 	const char* head;
 	int running;
+	std::string username;
 	void render();
 	void draw();
 	void draw(Object obj);
@@ -46,7 +47,7 @@ private:
 	void updateAnimation();
 	void input();
 public:
-	Hang(SDL_Renderer* ren, SDL_Window* win);
+	Hang(SDL_Renderer* ren, SDL_Window* win, std::string username);
 	~Hang();
 	void loop();
 };
