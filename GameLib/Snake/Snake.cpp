@@ -40,20 +40,22 @@ Snake::Snake(SDL_Renderer* ren, SDL_Window* win, std::string username) {
 	fruit.setSource(0, 0, 25, 25);
 
 	//	BestScore
-	std::string tmpFile = "Assets/User/" + username + "/Snake.txt";
-	scoreFileName = tmpFile.c_str();
-	scoreFile.open(scoreFileName, std::fstream::in);
-	if (!scoreFile) {
-		scoreFile.open(scoreFileName, std::fstream::out);
-		scoreFile << "0" << std::endl;
-		scoreFile.close();
+	std::string scoreFileName = "Assets/User/" + username + "/Snake.txt";
+	iScoreFile.open(scoreFileName.c_str());
+	if (!iScoreFile) {
+		oScoreFile.open(scoreFileName.c_str());
 		bestScore = 0;
+		std::string tmpString = std::to_string(bestScore);
+		oScoreFile << tmpString.c_str() << std::endl;
+		oScoreFile.close();
+		std::cout << "new score" << std::endl;
 	}
 	else {
 		std::string tmpScore;
-		scoreFile >> tmpScore;
+		iScoreFile >> tmpScore;
 		bestScore = std::stoi(tmpScore);
-		scoreFile.close();
+		iScoreFile.close();
+		std::cout << "took score : " << bestScore << std::endl;
 	}
 
 	//	Initialize other variables
@@ -271,10 +273,17 @@ void Snake::logic() {
 		if (score > bestScore) {
 			bestScore = score;
 			std::string tmpScore = std::to_string(bestScore);
-			scoreFile.open(scoreFileName, std::fstream::out | std::fstream::trunc);
-			scoreFile << tmpScore.c_str() << std::endl;
-			scoreFile.close();
-			std::cout << "Updated bestScore" << std::endl;
+			std::string scoreFileName = "Assets/User/" + username + "/Snake.txt";
+			oScoreFile.open(scoreFileName.c_str());
+			if (oScoreFile.is_open()) {
+				std::string tmpString = std::to_string(bestScore);
+				oScoreFile << tmpString.c_str() << std::endl;
+				oScoreFile.close();
+				std::cout << "Updated bestScore" << std::endl;
+			}
+			else {
+				std::cout << "Couldn't update bestScore" << std::endl;
+			}
 		}
 		Mix_PlayChannel(-1, gulpEffect, 0);
 	}

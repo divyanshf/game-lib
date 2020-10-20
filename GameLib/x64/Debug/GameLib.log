@@ -1,4 +1,2 @@
-﻿  User.cpp
-C:\Users\Dev\Desktop\GameLib\GameLib\User\User.cpp(109,50): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Dev\Desktop\GameLib\GameLib\User\User.cpp(129,50): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+﻿  Pong.cpp
   GameLib.vcxproj -> C:\Users\Dev\Desktop\GameLib\x64\Debug\GameLib.exe

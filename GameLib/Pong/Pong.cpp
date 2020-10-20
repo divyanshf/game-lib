@@ -63,13 +63,13 @@ Pong::Pong(SDL_Renderer* ren, SDL_Window* win, std::string username) {
 	player2->setSource(0, 0, 20, 100);
 
 	//	Best scores from file
-	std::string tmpFile = "Assets/User/" + username + "/Pong.txt";
-	scoreFileName = tmpFile.c_str();
+	scoreFileName = "Assets/User/" + username + "/Pong.txt";
 	scoreFile.open(scoreFileName, std::fstream::in);
 	if (!scoreFile) {
 		scoreFile.open(scoreFileName, std::fstream::out);
 		bestScore = 0;
-		scoreFile << "0" << std::endl;
+		std::string tmpString = std::to_string(bestScore);
+		scoreFile << tmpString.c_str() << std::endl;
 		scoreFile.close();
 	}
 	else {
@@ -323,10 +323,16 @@ void Pong::scoreUp(Paddle* player) {
 		if (score1 > bestScore) {
 			bestScore = score1;
 			std::string tmpScore = std::to_string(bestScore);
+			scoreFileName = "Assets/User/" + username + "/Pong.txt";
 			scoreFile.open(scoreFileName, std::fstream::out | std::fstream::trunc);
-			scoreFile << tmpScore.c_str() << std::endl;
-			scoreFile.close();
-			std::cout << "Updated bestScore" << std::endl;
+			if (scoreFile.is_open()) {
+				scoreFile << "20" << std::endl;
+				scoreFile.close();
+				std::cout << "Updated bestScore" << std::endl;
+			}
+			else {
+				std::cout << "Couldn't update bestScore" << std::endl;
+			}
 		}
 	}
 	else if (player == player2) {
@@ -334,10 +340,16 @@ void Pong::scoreUp(Paddle* player) {
 		if (score2 > bestScore) {
 			bestScore = score2;
 			std::string tmpScore = std::to_string(bestScore);
+			scoreFileName = "Assets/User/" + username + "/Pong.txt";
 			scoreFile.open(scoreFileName, std::fstream::out | std::fstream::trunc);
-			scoreFile << tmpScore.c_str() << std::endl;
-			scoreFile.close();
-			std::cout << "Updated bestScore" << std::endl;
+			if (scoreFile.is_open()) {
+				scoreFile << "20" << std::endl;
+				scoreFile.close();
+				std::cout << "Updated bestScore" << std::endl;
+			}
+			else {
+				std::cout << "Couldn't update bestScore" << std::endl;
+			}
 		}
 	}
 	ball->reset();

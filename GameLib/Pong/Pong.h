@@ -36,7 +36,7 @@ private:
 	Paddle* player2;
 	int score1, score2, bestScore;
 	std::fstream scoreFile;
-	const char* scoreFileName;
+	std::string scoreFileName;
 	vecString pongOptions;
 	vecString::iterator pongOption;
 	std::string username;
