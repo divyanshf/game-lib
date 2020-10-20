@@ -50,8 +50,9 @@ private:
 	int mainX, mainY;	//	Grid (0, 0)
 	int posX, posY;	//	Snake Position
 	int fruitX, fruitY;	//	Fruit Position
-	const char* scoreFileName;
-	std::fstream scoreFile;
+	std::string scoreFileName;
+	std::ofstream oScoreFile;
+	std::ifstream iScoreFile;
 	int score, bestScore;
 	int running, game;
 public:
