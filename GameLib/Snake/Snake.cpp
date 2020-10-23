@@ -55,7 +55,6 @@ Snake::Snake(SDL_Renderer* ren, SDL_Window* win, std::string username) {
 		iScoreFile >> tmpScore;
 		bestScore = std::stoi(tmpScore);
 		iScoreFile.close();
-		std::cout << "took score : " << bestScore << std::endl;
 	}
 
 	//	Initialize other variables

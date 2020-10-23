@@ -1,2 +1,22 @@
-﻿  Pong.cpp
+﻿  Application.cpp
+  Hang.cpp
+C:\Users\Dev\Desktop\GameLib\GameLib\Hangman\Hang.cpp(39,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\Dev\Desktop\GameLib\GameLib\Hangman\Hang.cpp(227,45): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  Menu.cpp
+C:\Users\Dev\Desktop\GameLib\GameLib\Menu\Menu.cpp(57,24): warning C4244: 'return': conversion from '__int64' to 'int', possible loss of data
+  Object.cpp
+  Pong.cpp
+  Snake.cpp
+C:\Users\Dev\Desktop\GameLib\GameLib\Snake\Snake.cpp(10,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Tic.cpp
+C:\Users\Dev\Desktop\GameLib\GameLib\Tic\Tic.cpp(100,61): warning C4244: '=': conversion from '__int64' to 'int', possible loss of data
+C:\Users\Dev\Desktop\GameLib\GameLib\Tic\Tic.cpp(112,17): warning C4101: 'textHeight': unreferenced local variable
+  TicBoard.cpp
+C:\Users\Dev\Desktop\GameLib\GameLib\Tic\TicBoard.cpp(13,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  User.cpp
+C:\Users\Dev\Desktop\GameLib\GameLib\User\User.cpp(108,66): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+C:\Users\Dev\Desktop\GameLib\GameLib\User\User.cpp(157,50): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Dev\Desktop\GameLib\GameLib\User\User.cpp(177,50): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  Generating Code...
+C:\Users\Dev\Desktop\GameLib\GameLib\Menu\Menu.cpp(60): warning C4715: 'Menu::loop': not all control paths return a value
   GameLib.vcxproj -> C:\Users\Dev\Desktop\GameLib\x64\Debug\GameLib.exe
