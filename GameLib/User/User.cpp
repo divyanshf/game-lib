@@ -64,6 +64,54 @@ int User::checkError() {
 	return 1;
 }
 
+//	Encrypt password
+void User::encrypt() {
+	std::string tmpPassFile = "Assets/User/" + username + "/pass.txt";
+	const char* passFileName = tmpPassFile.c_str();
+	passFile.open(passFileName, std::fstream::out | std::fstream::app);
+	
+	std::string eString = "";
+	
+	for (int i = 0; i < password.length(); i++) {
+		int ch = password[i];
+		int binary[16];
+		int j = 15;
+		while (j >= 0) {
+			if (ch > 0) {
+				binary[j] = ch % 2;
+				ch = ch / 2;
+			}
+			else {
+				binary[j] = 0;
+			}
+			j--;
+		}
+		for (int j = 0; j < 16; j++) {
+			eString.append(std::to_string(binary[j]));
+		}
+
+		passFile << eString.c_str() << std::endl;
+
+		eString = "";
+	}
+	
+	passFile.close();
+}
+
+//	Decrypt password
+std::string User::decrypt() {
+	std::string dString = "";
+	std::string tmpString;
+	while (passFile >> tmpString) {
+		int decimal = 0;
+		for (int i = 0; i < 16; i++) {
+			decimal += (tmpString[i] == '0' ? 0 : 1) * std::pow(2, 15 - i);
+		}
+		dString += char(decimal);
+	}
+	return dString;
+}
+
 //	User Loop
 std::string User::loop() {
 	while (running) {
@@ -214,21 +262,19 @@ void User::input() {
 						const char* passFileName = tmpPassFile.c_str();
 						passFile.open(passFileName, std::fstream::in);
 						if (!passFile) {
-							passFile.open(passFileName, std::fstream::out);
-							passFile << password.c_str() << std::endl;
-							passFile.close();
+							encrypt();
+							std::cout << "pass file created" << std::endl;
 							running = 0;
 						}
 						else {
-							std::string tmpPass;
-							passFile >> tmpPass;
-							passFile.close();
+							std::string tmpPass = decrypt();
 							if (tmpPass == password) {
 								running = 0;
 							}
 							else {
 								error = true;
 							}
+							std::cout << "pass file not created" << std::endl;
 						}
 					}
 					else {

@@ -326,7 +326,7 @@ void Pong::scoreUp(Paddle* player) {
 			scoreFileName = "Assets/User/" + username + "/Pong.txt";
 			scoreFile.open(scoreFileName, std::fstream::out | std::fstream::trunc);
 			if (scoreFile.is_open()) {
-				scoreFile << "20" << std::endl;
+				scoreFile << tmpScore.c_str() << std::endl;
 				scoreFile.close();
 				std::cout << "Updated bestScore" << std::endl;
 			}
@@ -343,7 +343,7 @@ void Pong::scoreUp(Paddle* player) {
 			scoreFileName = "Assets/User/" + username + "/Pong.txt";
 			scoreFile.open(scoreFileName, std::fstream::out | std::fstream::trunc);
 			if (scoreFile.is_open()) {
-				scoreFile << "20" << std::endl;
+				scoreFile << tmpScore.c_str() << std::endl;
 				scoreFile.close();
 				std::cout << "Updated bestScore" << std::endl;
 			}

@@ -6,6 +6,8 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
+#include <string>
+#include <math.h>
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
@@ -27,6 +29,8 @@ private:
 	std::fstream passFile;
 	bool error, putPassword, showPass;
 	int running, quit;
+	void encrypt();
+	std::string decrypt();
 public:
 	User(SDL_Renderer* ren, SDL_Window* win);
 	~User();
