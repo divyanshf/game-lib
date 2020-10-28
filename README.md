@@ -5,6 +5,8 @@ This is a C++ project to implement OOPS concepts via interactive games.
 ### Games
 - TIC-TAC-TOE
 - PONG
+- HANGMAN
+- SNAKE
 
 SDL2 is the graphics library used.
 

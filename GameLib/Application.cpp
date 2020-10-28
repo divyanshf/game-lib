@@ -1,6 +1,7 @@
 #define SDL_MAIN_HANDLED
 
 #include <SDL.h>
+#include "Initialize/Initialize.h"
 #include "Menu/Menu.h"
 #include "Tic/Tic.h"
 #include "Pong/Pong.h"
@@ -37,20 +38,11 @@ int main() {
 	int window = 1;
 	std::string username = "";
 
-	//	Inititialize the sdl renderer
-	SDL_Renderer* ren;
-	//	Inititialize the sdl window
-	SDL_Window* win;
+	//	Initialize SDL stuff
+	Initialize init;
 
-	//	Initialize sdl
-	if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
-		std::cout << "Failed at SDL_Init" << std::endl;
-	}
-	//	Create window and renderer
-	if (SDL_CreateWindowAndRenderer(1024, 720, 0, &win, &ren) < 0) {
-		std::cout << "Failed at SDL_CreateWindowAndRenderer" << std::endl;
-	}
-	SDL_SetWindowTitle(win, "GameLib");
+	SDL_Renderer* ren = init.getRenderer();
+	SDL_Window* win = init.getWindow();
 
 	//	User Menu
 	User user(ren, win);
@@ -83,8 +75,6 @@ int main() {
 			}
 		}
 	}
-	SDL_DestroyRenderer(ren);
-	SDL_DestroyWindow(win);
-	SDL_Quit();
+
 	return 0;
 }
