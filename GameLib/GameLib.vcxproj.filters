@@ -18,67 +18,202 @@
     <ClCompile Include="Application.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Menu\Menu.cpp">
+    <ClCompile Include="Classes\Flappy\Flappy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Tic\Tic.cpp">
+    <ClCompile Include="Classes\Hangman\Hang.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Tic\TicBoard.cpp">
+    <ClCompile Include="Classes\Initialize\Initialize.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Pong\Pong.cpp">
+    <ClCompile Include="Classes\Menu\Menu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Object\Object.cpp">
+    <ClCompile Include="Classes\Object\Object.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Hangman\Hang.cpp">
+    <ClCompile Include="Classes\Pong\Pong.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Snake\Snake.cpp">
+    <ClCompile Include="Classes\Snake\Snake.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="User\User.cpp">
+    <ClCompile Include="Classes\Tic\Tic.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Initialize\Initialize.cpp">
+    <ClCompile Include="Classes\Tic\TicBoard.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\User\User.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Menu\Menu.h">
+    <ClInclude Include="Classes\Flappy\Flappy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Tic\Tic.h">
+    <ClInclude Include="Classes\Hangman\Hang.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Tic\TicBoard.h">
+    <ClInclude Include="Classes\Initialize\Initialize.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Pong\Pong.h">
+    <ClInclude Include="Classes\Menu\Menu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Pong\Ball.h">
+    <ClInclude Include="Classes\Object\Object.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Pong\Paddle.h">
+    <ClInclude Include="Classes\Pong\Ball.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Object\Object.h">
+    <ClInclude Include="Classes\Pong\Paddle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Hangman\Hang.h">
+    <ClInclude Include="Classes\Pong\Pong.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Snake\Snake.h">
+    <ClInclude Include="Classes\Snake\Snake.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="User\User.h">
+    <ClInclude Include="Classes\Tic\Tic.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Initialize\Initialize.h">
+    <ClInclude Include="Classes\Tic\TicBoard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\User\User.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\Assets\Flappy\flappy.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Assets\GameImage\Controller.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Assets\GameImage\Exit.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Assets\GameImage\HangMan.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Assets\GameImage\Pong.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Assets\GameImage\Simon.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Assets\GameImage\Snake.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Assets\GameImage\Tic.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Assets\GameImage\Volume.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Assets\Hangman\Anim.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Assets\Pong\ball.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Assets\Pong\paddle.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Assets\Pong\pong.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Assets\Snake\fruit.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Assets\Snake\head.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Assets\Snake\snake.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Assets\Tic\tic.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Assets\GameImage\Flappy.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Controller.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Fonts\Chopsic\misc\FSLA_NonCommercial_License-4726.html" />
+    <None Include="Resources\Assets\Hangman\anim.ai" />
+    <None Include="Resources\Assets\Hangman\anim2.ai" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resources\Assets\Hangman\hangwords.txt" />
+    <Text Include="Resources\Fonts\Mono\Bitstream Vera License.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="Resources\Audio\Bgm.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="Resources\Audio\Click.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="Resources\Audio\Collide.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="Resources\Audio\Error.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="Resources\Audio\gulp.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="Resources\Audio\HangBgm.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="Resources\Audio\Lose.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="Resources\Audio\Scream.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="Resources\Audio\Scream2.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="Resources\Audio\Scream3.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="Resources\Audio\Stapler.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="Resources\Audio\Start.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="Resources\Audio\Thanks.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="Resources\Audio\Win.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="Resources\Fonts\Chopsic\Chopsic-K6Dp.ttf" />
+    <Font Include="Resources\Fonts\Mono\VeraMono-Bold.ttf" />
+    <Font Include="Resources\Fonts\Mono\VeraMono.ttf" />
+    <Font Include="Resources\Fonts\Mono\VeraMono-Bold-Italic.ttf" />
+    <Font Include="Resources\Fonts\Mono\VeraMono-Italic.ttf" />
+    <Font Include="Resources\Fonts\Montserrat\MontserratLight-ywBvq.ttf" />
+    <Font Include="Resources\Fonts\Montserrat\MontserratLightItalic-axBzx.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="GameLib.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>
