@@ -1,16 +1,254 @@
-\documentclass[a4paper,12pt]{report}
+\documentclass[12pt]{article} 
+%\topmargin=-1in    
+\textheight=22cm  
+\oddsidemargin=1pt % leftmargin is 1 inch
+\textwidth=6.5in   % textwidth of 6.5in leaves 1 inch for right margin
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage[tight,footnotesize]{subfigure}
+\usepackage{eso-pic}
+\usepackage{float}
+\usepackage{blindtext}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{ucs}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{color}
+\usepackage{lettrine}
+\usepackage{enumerate}
+\usepackage{newlfont}
+%\usepackage{subfig}
+%\usepackage[round]{natbib}
+
+\renewcommand{\labelitemi}{$\bullet$}
+\renewcommand{\labelitemii}{$\cdot$}
+\renewcommand{\labelitemiii}{$\diamond$}
+\renewcommand{\labelitemiv}{$\ast$}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+% for circle $\circ$
+% set margin -------------------------------------------------------------
+\oddsidemargin=-.1in
+\evensidemargin=.1in
+\textwidth=6.2in
+\topmargin=-.5in
+\textheight=9in
+%\parindent=0in
+%\pagestyle{plain}
+%\linespread{1.3}
+%% My definition
+%\newcommand{\mvec}[1]{\mbox{\bfseries\itshape #1}}
+
+%hyperref
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,      
+	urlcolor=cyan,
+}
+
+% Line spacing -----------------------------------------------------------
+\newlength{\defbaselineskip}
+\setlength{\defbaselineskip}{\baselineskip}
+\newcommand{\setlinespacing}[1]%
+{\setlength{\baselineskip}{#1 \defbaselineskip}}
+\newcommand{\doublespacing}{\setlength{\baselineskip}%
+	{2.0 \defbaselineskip}}
+\setlength{\parskip}{1em}
+\renewcommand{\baselinestretch}{1.5}
+% Maths --------------------------------------------------------------------
+\newtheorem{lemma}{Lemma}
+\newtheorem{thm}{Theorem}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+\newtheorem{corollary}{Corollary}
+\newtheorem{remark}{Remark}
+%\thispagestyle{empty}
+%--------------------------------------------------------------------------
 
 \begin{document}
+	% Title page ---------------------------------------------------------------
+	\thispagestyle{empty}
+	\begin{titlepage}
+		\begin{figure}[h]
+			\centerline{\includegraphics[width=1.2in,height=1.6in]{iiitm}}
+		\end{figure}
+		\vspace{0.1in}
+		\begin{center}
+			{\Large \bf ABV - Indian Institute Of Information Technology And Management, Gwalior\\}
+		\end{center}
+		\begin{center}
+			%{\Large \textbf{GameLib}}\\[1.2cm]
+			\vspace{1.0in}
+			\textbf{\huge  Project Report} \\
+		\end{center}
+		\begin{center}
+			%\vspace{0.2in}
+			%{\large Dissertation} \\
+			%{\Large \it Report} \\
+			%\vspace{0.3in}
+			%{\large \it in\\}
+			%\vspace{0.3in}
+			%{\Large \bf CSE (Specialization)} \\
+			%{\large \it by\\}
+			{\Large \bf Topic - GameLib}\\
+			\vspace{0.2in}
+			{\Large \bf Object Oriented Programming} \\
+			November 2020\\
+			\vspace{0.5in}
+			{\Large Mentor :}\\
+			{\Large \bf Dr. Vinal Patel}
+			\vspace{0.5in}
+			\begin{multicols}{2}
+				[
+				{\Large Contributors :}
+				]
+				{\Large \bf Prateek Singh}\hspace{1in}
+				{\bf (2019BCS-043)}\hspace{1in}
+				{\Large \bf Divyansh Falodiya}\hspace{1in}
+				{\bf (2019BCS-020)}
+			\end{multicols}
+			\vspace{0.4in}
+			%{\large \it under the supervision of\\}
+			\vspace{0.3in}
+			%{\Large \bf Dr. VINAL PATEL}\\
+			\end {center}
+			\vspace{0.2in}
+			
+			%\vspace{0.2in}
+			%{\large \bf Aug-Sep, 2017}
+		\end{titlepage}
+		% Synopsis main text -----------------------------------------------------------------
+		\iffalse
+		\newpage
+		\setcounter{page}{1}
+		\setlinespacing{1}
+		\begin{center}
+			{\large \bf Contents}
+		\end{center}
+		I hereby certify that I have properly checked and verified all the items as prescribed in the check-list and ensure that my thesis/report is in proper format as specified in the guideline for thesis preparation. \\
+		
+		\noindent I also declare that the work containing in this report is my own work. I, understand that plagiarism is defined as any one or combination of the following:
+		\begin{enumerate}
+			\item To steal and pass off (the ideas or words of another) as one's own
+			\item To use (another's production) without crediting the source
+			\item To commit literary theft
+			\item To present as new and original an idea or product derived from an existing source.
+		\end{enumerate}
+		I understand that plagiarism involves an intentional act by the plagiarist of using someone else`s work/ideas completely/partially and claiming authorship/originality of the work/ideas. Verbatim copy as well as close resemblance to some else`s work constitute plagiarism.\\
+		
+		\noindent I have given due credit to the original authors/sources for all the words, ideas, diagrams, graphics, computer programs, experiments, results, websites, that are not my original contribution. I have used quotation marks to identify verbatim sentences and given credit to the original authors/sources.\\
+		
+		\noindent I affirm that no portion of my work is plagiarized, and the experiments and results reported in the report/dissertation/thesis are not manipulated. In the event of a complaint of plagiarism and the manipulation of the experiments and results, I shall be fully responsible and answerable. My faculty supervisor(s) will not be responsible for the same.\vspace{1cm}\\
+		
+		\noindent Signature:\vspace{1cm}\\
+		Name: ANURAG SINGH \\
+		Roll No.: 2018DC-02  \\
+		Date: 04/03/2020   \\
+		\clearpage
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		% Ack
+		%\begin{center}
+		%{\large \bf ACKNOWLEDGEMENT}
+		%\end{center}
+		%I am highly indebted to {\bf Supervisor name}, and obliged for giving me the autonomy of
+		%functioning and experimenting with ideas. I would like to take this opportunity to express my profound gratitude to him
+		%not only for his academic guidance but also for his personal interest in my report and constant support coupled with
+		%confidence boosting and motivating sessions which proved very fruitful and were instrumental in infusing self-assurance
+		%and trust within me. The nurturing and blossoming of the present work is mainly due to his valuable guidance,
+		%suggestions, astute judgment, constructive criticism and an eye for perfection. My mentor always answered myriad of my
+		%doubts with smiling graciousness and prodigious patience, never letting me feel that I am novices by always lending an
+		%ear to my views, appreciating and improving them and by giving me a free hand in my report. It's only
+		%because of his overwhelming interest and helpful attitude, the present work has attained the stage it has. \\
+		%\\
+		%Finally, I am grateful to our Institution and colleagues whose constant encouragement served to renew my spirit,
+		%refocus my attention and energy and helped me in carrying out this work.\\ \\ \\ \\
+		%\vspace{0.7in}
+		%\textbf{Date:}
+		%\hspace{3.8in}
+		%\textbf{Candidate name}
+		%\clearpage
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		
+		
+		\topmargin=-1in    
+		\textheight=24cm  
+		\oddsidemargin=0pt % leftmargin is 1 inch
+		\textwidth=6.5in   % textwidth of 6.5in leaves 1 inch for right margin
+		
+		\begin{center}
+			{\large \bf ABSTRACT}
+		\end{center}  
+		
+		Recently, wireless sensor networks (WSNs) are gaining interest among the research community due to their vast applications in the field of health care, defense, household environment,etc. Fast convergence rate, low complexity, less estimation error as well as high energy efficiency are the primary design features of communication protocols and physical layer technologies used in WSNs. Because of limited power supply, computational power and memory capacity of sensor nodes, power management techniques and less power consuming relay policies should be used in order to achieve acceptable signal to noise ratio as well as better quality of service. Most of these parameters are affected by the presence of modelling error in the channel estimation process. Therefore the performance of WSNs can be improved by reducing the channel estimation error. Therefore, in this thesis, a set of
+		novel channel estimation algorithms that can achieve both faster convergence and smaller steady-state error will be designed.  \\
+		\\
+		\\
+		%{\it \textbf{ Keywords: Channel estimation, fast convergence, high energy efficiency, convex combination, set-membership, error bound.}}\\
+		
+		
+		\clearpage
+		\fi
+		%\listoftables
+		
+		\tableofcontents
+		\clearpage
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\section{Introduction to GameLib}
+		\setlength{\parindent}{10ex}
+		Games are an essential part of every person's life. Be it a kid, a youngster or an elder, everyone is aware of and have played various games. Games have always been a part of our culture and they still are. Games like 'Chaupar', 'Ashtapad', 'Krida-Patram' and many more have always been referenced in many historical texts. Be it any era, games have always been present to entertain people and have kept on evolving to suit the human mind.
+		\subsection{GameLib}
+		\begin{flushleft}
+			\setlength{\parindent}{10ex}
+			GameLib is a software application which provides the user with plenty of games to play. It is written completely in the C++ programming language and is built specifically for the Windows(x64) Operating System\footnote{This is subject to change as versions in the future may be able to include multiple platforms.}. \par
+			The application utilizes a third party library known as Simple DirectMedia Layer which provides us with low level access to audio, keyboard, mouse, and graphics hardware via OpenGL and Direct3D. \par
+			\noindent There are, at present, five games available in GameLib :
+			\begin{itemize}
+				\item Tic-Tac-Toe
+				\item Pong
+				\item Hangman
+				\item Snake
+				\item Flappy Bird
+			\end{itemize}
+		\end{flushleft}
+		
+		\clearpage
+		
+		\subsection{Features}
+		\begin{flushleft}
+			\setlength{\parindent}{10ex}
+			The features of this project are something that differentiates it from other similar applications. Some remarkable features include :
+			\begin{itemize}
+				\item Authentication - The application keeps track of the user who has registered to it and lets the user create a password for it during registration. Only a authenticated user can play the games that are included in the application.
+				\item Security - The application is completely secure and the passwords are encrypted so that no other user can alter your private data.
+				\item Multiple Users - The application has the ability to create various user profiles and manage them seperately, thus allowing multiple users to access the application.
+				\item AI - Certain two player games also have the feature of AI to play the chance of a player so that even a single player can be entertained by the games. This feature is remarkable because it makes sure that the computer never misses a chance to have an equal or upper-hand on the user.
+				\item User Interface - The user interface for the application is completely graphical and is elegant enough to keep the user engaged. The visuals are gripping along with a dark theme to provide the best user experience.
+			\end{itemize}
+		\end{flushleft}
+		
+		\clearpage
+		
+		\section{Principles and Concepts}
+		\subsection{Game Programming}
+		\subsection{Object Oriented Programming}
+		
+		\clearpage
+		
+		\section{Significance of the project}
+		
+		\clearpage
+		
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\clearpage
+		
+		\bibliographystyle{IEEEtran}
+		\bibliography{myref3}
+		
+	\end{document}
 	
-\title{GameLib}
-\author{Divyansh Falodiya}
-\author{Prateek Singh}
-\date{\today}
-\maketitle
-
-\section{Introduction}
-
-\paragraph{}
-An undefined paragraph inside introduction
-
-\end{document}          
