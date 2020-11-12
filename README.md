@@ -16,5 +16,7 @@ This comes under our project for Object Oriented Programming Language. The under
 - If your best scores aren't updating, try to run the executable in administrative mode (if not already).
 - If there is an error of missing .dll files, try to re-install the package. If the issue stays, download the dll(s) from the project dependancies and store them in the application folder.
 
+### Setup
+You can download the latest version of GameLib [here](https://github.com/DivyanshFalodiya/GameLib/files/5480084/Gamelib.zip).
 
 We will keep enhancing this project regularly.
