@@ -199,21 +199,21 @@
 		\tableofcontents
 		\clearpage
 		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-		\section{Introduction to GameLib}
+		\section{Introduction}
 		\setlength{\parindent}{10ex}
 		Games are an essential part of every person's life. Be it a kid, a youngster or an elder, everyone is aware of and have played various games. Games have always been a part of our culture and they still are. Games like 'Chaupar', 'Ashtapad', 'Krida-Patram' and many more have always been referenced in many historical texts. Be it any era, games have always been present to entertain people and have kept on evolving to suit the human mind.
 		\subsection{GameLib}
 		\begin{flushleft}
 			\setlength{\parindent}{10ex}
-			GameLib is a software application which provides the user with plenty of games to play. It is written completely in the C++ programming language and is built specifically for the Windows(x64) Operating System\footnote{This is subject to change as versions in the future may be able to include multiple platforms.}. \par
+			GameLib is a software application which provides the user with plenty of games to play. It is written completely in the C++ programming language and is built specifically for the Windows(x64) Operating System\footnote{This is subject to change.}. \par
 			The application utilizes a third party library known as Simple DirectMedia Layer which provides us with low level access to audio, keyboard, mouse, and graphics hardware via OpenGL and Direct3D. \par
 			\noindent There are, at present, five games available in GameLib :
 			\begin{itemize}
-				\item Tic-Tac-Toe
-				\item Pong
-				\item Hangman
-				\item Snake
-				\item Flappy Bird
+				\item {\bf Tic-Tac-Toe}
+				\item {\bf Pong}
+				\item {\bf Hangman}
+				\item {\bf Snake}
+				\item {\bf Flappy Bird}
 			\end{itemize}
 		\end{flushleft}
 		
@@ -224,11 +224,11 @@
 			\setlength{\parindent}{10ex}
 			The features of this project are something that differentiates it from other similar applications. Some remarkable features include :
 			\begin{itemize}
-				\item Authentication - The application keeps track of the user who has registered to it and lets the user create a password for it during registration. Only a authenticated user can play the games that are included in the application.
-				\item Security - The application is completely secure and the passwords are encrypted so that no other user can alter your private data.
-				\item Multiple Users - The application has the ability to create various user profiles and manage them seperately, thus allowing multiple users to access the application.
-				\item AI - Certain two player games also have the feature of AI to play the chance of a player so that even a single player can be entertained by the games. This feature is remarkable because it makes sure that the computer never misses a chance to have an equal or upper-hand on the user.
-				\item User Interface - The user interface for the application is completely graphical and is elegant enough to keep the user engaged. The visuals are gripping along with a dark theme to provide the best user experience.
+				\item {\bf Authentication} - The application keeps track of the user who has registered to it and lets the user create a password for it during registration. Only a authenticated user can play the games that are included in the application.
+				\item {\bf Security} - The application is completely secure and the passwords are encrypted so that no other user can alter your private data.
+				\item {\bf Multiple Users} - The application has the ability to create various user profiles and manage them seperately, thus allowing multiple users to access the application.
+				\item {\bf AI} - Certain two player games also have the feature of AI to play the chance of a player so that even a single player can be entertained by the games. This feature is remarkable because it makes sure that the computer never misses a chance to have an equal or upper-hand on the user.
+				\item {\bf User Interface} - The user interface for the application is completely graphical and is elegant enough to keep the user engaged. The visuals of the application are gripping enough and they come along with a dark theme to provide the best user experience.
 			\end{itemize}
 		\end{flushleft}
 		
@@ -236,19 +236,31 @@
 		
 		\section{Principles and Concepts}
 		\subsection{Game Programming}
+		\begin{flushleft}
+			\setlength{\parindent}{10ex}
+			 This aspect of programming deals with the core features of a game. Rendering, game physics, collisions, frame rates, etc, are all of a part of this aspect. As far as GameLib is concerned, it makes a thorough use of the very basics of game programming. \par
+			 For example, games like {\it Flappy Bird, Snake}, etc, have the feature of collision detection to detect any collision between the walls(say) and the player and updates the scores accordingly.
+		\end{flushleft}
 		\subsection{Object Oriented Programming}
-		
+		\begin{flushleft}
+			\setlength{\parindent}{10ex}
+			Object Oriented Programming is the foundation layer over which the whole of GameLib stands. It is the most important aspect of the application. Programming features like modularity, object instances, encapsulation, etc, are only possible because of OOPS. The application make use of most of these features provided by OOPS. It is because of OOPS's features like modularity and abstraction that the source code for the application is easily understandable and can be upgraded to better suit the implementation without much hassle. \par 
+			The most important feature of OOPS (in terms of use) is {\bf Modularity}. It is this feature that made sure the code was neat and understandable to even a non-programmer. It made sure that the source code can be divided into a bunch of different modules with each having its own purpose and thus decreasing the hassle required for reusing particular functions and methods. \par 
+		\end{flushleft}
+	
 		\clearpage
 		
 		\section{Significance of the project}
-		
+		\begin{flushleft}
+			\setlength{\parindent}{10ex}
+			GameLib is a project that we started a month ago to understand and apply our knowledge of Object Oriented Programming and its various domains. Little did we know that we would be able to increase our scope of knowledge to such a great extent. Working on GameLib has been a remarkable journey for us not only because we were able able to implement our skills and knowledge but also because we were able to garner and grow our existing knowledge of such a vast topic. \par
+			Building GameLib from absolute scratch has been a really great experience for us because not only did it make us understand more about Object Oriented Programming but also introduced us to various aspects of programming in general. This project has been a real eye-opener for us. \par 
+			{\it While this may be the first version of GameLib and may not be the best one out there, we will make sure that we keep upgrading it with our growing knowledge of the domain and will try to implement some really important features which may have been missed in this one. You can build the source code from our github repository \href{https://github.com/DivyanshFalodiya/GameLib}{here}}
+		\end{flushleft}
 		\clearpage
 		
 		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 		\clearpage
-		
-		\bibliographystyle{IEEEtran}
-		\bibliography{myref3}
 		
 	\end{document}
 	
