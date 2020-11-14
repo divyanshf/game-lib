@@ -111,10 +111,12 @@ void Flappy::addPipes() {
 
 //	Hang main loop
 void Flappy::loop() {
+	//double first;
+	//double last = 0;
 	Mix_PlayMusic(bgm, -1);
 	while (running) {
-		frameStart = SDL_GetTicks();
-
+	frameStart = SDL_GetTicks();
+//	first = SDL_GetTicks();
 		render();
 		input();
 		update();
@@ -124,7 +126,13 @@ void Flappy::loop() {
 		if (frameDelay > frameTime) {
 			SDL_Delay(frameDelay - frameTime);
 		}
+		/*if (first - last < 16.7)
+		{
+			SDL_Delay(16.7 - (first - last));
+		}
+		last = first;*/
 	}
+	
 	Mix_HaltMusic();
 	Mix_PlayChannel(-1, loseEffect, 0);
 	SDL_Delay(3000);
@@ -134,6 +142,12 @@ void Flappy::render() {
 	SDL_RenderClear(ren);
 
 	int textWidth, textHeight;
+	
+	SDL_Surface* surface;
+	surface = IMG_Load("GameLib/Resources/Assets/Flappy/211.png");
+	SDL_Texture* tex;
+	tex = SDL_CreateTextureFromSurface(ren, surface);
+	SDL_RenderCopy(ren,tex,NULL,NULL);
 
 	
 	SDL_SetRenderDrawColor(ren, 0, 0, 0, 255);

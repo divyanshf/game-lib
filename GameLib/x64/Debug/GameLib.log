@@ -1,1 +1,4 @@
-﻿  GameLib.vcxproj -> F:\GameLib\x64\Debug\GameLib.exe
+﻿  Flappy.cpp
+C:\Users\PRATEEK SINGH\GameLib\GameLib\Classes\Flappy\Flappy.cpp(39,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\PRATEEK SINGH\GameLib\GameLib\Classes\Flappy\Flappy.cpp(73,29): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+  GameLib.vcxproj -> C:\Users\PRATEEK SINGH\GameLib\x64\Debug\GameLib.exe
