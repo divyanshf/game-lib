@@ -37,3 +37,42 @@ F:\GameLib\x64\Debug\Resources\Assets\Hangman\anim.ai
 F:\GameLib\x64\Debug\Resources\Assets\Hangman\anim2.ai
 F:\GameLib\x64\Debug\Resources\Assets\GameImage\Controller.png
 F:\GameLib\x64\Debug\Resources\Assets\GameImage\Flappy.png
+C:\Users\PRATEEK SINGH\GameLib\x64\Debug\Resources\Assets\Hangman\hangwords.txt
+C:\Users\PRATEEK SINGH\GameLib\x64\Debug\Resources\Fonts\Chopsic\Chopsic-K6Dp.ttf
+C:\Users\PRATEEK SINGH\GameLib\x64\Debug\Resources\Fonts\Mono\VeraMono-Bold.ttf
+C:\Users\PRATEEK SINGH\GameLib\x64\Debug\Resources\Fonts\Montserrat\MontserratLight-ywBvq.ttf
+C:\Users\PRATEEK SINGH\GameLib\x64\Debug\Resources\Fonts\Montserrat\MontserratLightItalic-axBzx.ttf
+C:\Users\PRATEEK SINGH\GameLib\x64\Debug\Resources\Assets\Flappy\flappy.png
+C:\Users\PRATEEK SINGH\GameLib\x64\Debug\Resources\Assets\GameImage\Controller.png
+C:\Users\PRATEEK SINGH\GameLib\x64\Debug\Resources\Assets\GameImage\Exit.png
+C:\Users\PRATEEK SINGH\GameLib\x64\Debug\Resources\Assets\GameImage\Flappy.png
+C:\Users\PRATEEK SINGH\GameLib\x64\Debug\Resources\Assets\GameImage\HangMan.png
+C:\Users\PRATEEK SINGH\GameLib\x64\Debug\Resources\Assets\GameImage\Pong.png
+C:\Users\PRATEEK SINGH\GameLib\x64\Debug\Resources\Assets\GameImage\Simon.png
+C:\Users\PRATEEK SINGH\GameLib\x64\Debug\Resources\Assets\GameImage\Snake.png
+C:\Users\PRATEEK SINGH\GameLib\x64\Debug\Resources\Assets\GameImage\Tic.png
+C:\Users\PRATEEK SINGH\GameLib\x64\Debug\Resources\Assets\GameImage\Volume.png
+C:\Users\PRATEEK SINGH\GameLib\x64\Debug\Resources\Assets\Hangman\Anim.png
+C:\Users\PRATEEK SINGH\GameLib\x64\Debug\Resources\Assets\Pong\ball.png
+C:\Users\PRATEEK SINGH\GameLib\x64\Debug\Resources\Assets\Pong\paddle.png
+C:\Users\PRATEEK SINGH\GameLib\x64\Debug\Resources\Assets\Pong\pong.png
+C:\Users\PRATEEK SINGH\GameLib\x64\Debug\Resources\Assets\Snake\fruit.png
+C:\Users\PRATEEK SINGH\GameLib\x64\Debug\Resources\Assets\Snake\head.png
+C:\Users\PRATEEK SINGH\GameLib\x64\Debug\Resources\Assets\Snake\snake.png
+C:\Users\PRATEEK SINGH\GameLib\x64\Debug\Resources\Assets\Tic\tic.png
+C:\Users\PRATEEK SINGH\GameLib\x64\Debug\Resources\Audio\Bgm.wav
+C:\Users\PRATEEK SINGH\GameLib\x64\Debug\Resources\Audio\Click.wav
+C:\Users\PRATEEK SINGH\GameLib\x64\Debug\Resources\Audio\Collide.wav
+C:\Users\PRATEEK SINGH\GameLib\x64\Debug\Resources\Audio\Error.wav
+C:\Users\PRATEEK SINGH\GameLib\x64\Debug\Resources\Audio\gulp.wav
+C:\Users\PRATEEK SINGH\GameLib\x64\Debug\Resources\Audio\HangBgm.wav
+C:\Users\PRATEEK SINGH\GameLib\x64\Debug\Resources\Audio\Lose.wav
+C:\Users\PRATEEK SINGH\GameLib\x64\Debug\Resources\Audio\Scream.wav
+C:\Users\PRATEEK SINGH\GameLib\x64\Debug\Resources\Audio\Scream2.wav
+C:\Users\PRATEEK SINGH\GameLib\x64\Debug\Resources\Audio\Scream3.wav
+C:\Users\PRATEEK SINGH\GameLib\x64\Debug\Resources\Audio\Stapler.wav
+C:\Users\PRATEEK SINGH\GameLib\x64\Debug\Resources\Audio\Start.wav
+C:\Users\PRATEEK SINGH\GameLib\x64\Debug\Resources\Audio\Thanks.wav
+C:\Users\PRATEEK SINGH\GameLib\x64\Debug\Resources\Audio\Win.wav
+C:\Users\PRATEEK SINGH\GameLib\x64\Debug\Resources\Assets\Hangman\anim.ai
+C:\Users\PRATEEK SINGH\GameLib\x64\Debug\Resources\Assets\Hangman\anim2.ai
