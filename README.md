@@ -17,6 +17,6 @@ This comes under our project for Object Oriented Programming Language. The under
 - If there is an error of missing .dll files, try to re-install the package. If the issue stays, download the dll(s) from the project dependancies and store them in the application folder.
 
 ### Setup
-You can download the latest version of GameLib [here](https://github.com/DivyanshFalodiya/GameLib/files/5480084/Gamelib.zip).
+You can download the latest version of GameLib [here](https://github.com/DivyanshFalodiya/GameLib/files/5540760/Gamelib.zip).
 
 We will keep enhancing this project regularly.
