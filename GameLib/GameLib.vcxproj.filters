@@ -148,6 +148,12 @@
     <Image Include="Controller.ico">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="Resources\Assets\Flappy\211.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Assets\Flappy\back.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Fonts\Chopsic\misc\FSLA_NonCommercial_License-4726.html" />

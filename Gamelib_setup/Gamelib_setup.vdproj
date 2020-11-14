@@ -57,12 +57,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_5ED69F52EFD74F9A92A65D6F7D743794"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_831BF99D249A4099816CC25427CEF3C9"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -118,6 +112,12 @@
         "Entry"
         {
         "MsmKey" = "8:_BEE2C3D0EDA549A9B33F394CF6CEE558"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_BEF2CFAD33BC48028E53B37702D2C014"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -683,7 +683,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Gamelib"
         "ProductCode" = "8:{E707F96D-E16F-4E40-AD93-4868743E0DF1}"
-        "PackageCode" = "8:{C751325F-A028-42F8-A890-14452DE1D3F1}"
+        "PackageCode" = "8:{5CD5D400-056E-4386-A09B-B49E51B8396C}"
         "UpgradeCode" = "8:{A44E7766-A82A-4448-A514-E1FBA3062195}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -803,32 +803,32 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_3B28AFDF330341A78F10FFC8526AB896"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_6CBC337BCD454572A4C30EE943B328BF"
             {
-            "Name" = "8:Gamelib"
+            "Name" = "8:GameLib"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_5ED69F52EFD74F9A92A65D6F7D743794"
-            "Folder" = "8:_2B231E54497F4CF5A54FDE1C4B45AA97"
-            "WorkingFolder" = "8:_37A39461190D425D981E1C2ACE7C67A7"
-            "Icon" = "8:_DFB3F5BFA00C4EF5AE1A6AECCE414DE6"
-            "Feature" = "8:"
-            }
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_7002287A4E6D4BF2829A54B8D9F11AA0"
-            {
-            "Name" = "8:Gamelib"
-            "Arguments" = "8:"
-            "Description" = "8:"
-            "ShowCmd" = "3:1"
-            "IconIndex" = "3:0"
-            "Transitive" = "11:FALSE"
-            "Target" = "8:_5ED69F52EFD74F9A92A65D6F7D743794"
+            "Target" = "8:_BEF2CFAD33BC48028E53B37702D2C014"
             "Folder" = "8:_B8376D587CB540E392C61D5C560901AD"
             "WorkingFolder" = "8:_37A39461190D425D981E1C2ACE7C67A7"
-            "Icon" = "8:_DFB3F5BFA00C4EF5AE1A6AECCE414DE6"
+            "Icon" = "8:"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_842714FD5E284896BDFE9D4A8A2BDFEA"
+            {
+            "Name" = "8:GameLib"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_BEF2CFAD33BC48028E53B37702D2C014"
+            "Folder" = "8:_2B231E54497F4CF5A54FDE1C4B45AA97"
+            "WorkingFolder" = "8:_37A39461190D425D981E1C2ACE7C67A7"
+            "Icon" = "8:"
             "Feature" = "8:"
             }
         }
@@ -1230,35 +1230,7 @@
         }
         "ProjectOutput"
         {
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_5ED69F52EFD74F9A92A65D6F7D743794"
-            {
-            "SourcePath" = "8:..\\x64\\Release\\GameLib.exe"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_37A39461190D425D981E1C2ACE7C67A7"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            "ProjectOutputGroupRegister" = "3:1"
-            "OutputConfiguration" = "8:Release|x64"
-            "OutputGroupCanonicalName" = "8:Built"
-            "OutputProjectGuid" = "8:{82ADF7ED-292B-4F5B-A3A7-322A509A9408}"
-            "ShowKeyOutput" = "11:TRUE"
-                "ExcludeFilters"
-                {
-                }
-            }
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_A26009947991443586A94DD606F115D5"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_8822389B6F4D4B3BBF157F7A0C0DA850"
             {
             "SourcePath" = "8:"
             "TargetName" = "8:"
@@ -1280,6 +1252,34 @@
             "ProjectOutputGroupRegister" = "3:1"
             "OutputConfiguration" = "8:"
             "OutputGroupCanonicalName" = "8:ContentFiles"
+            "OutputProjectGuid" = "8:{82ADF7ED-292B-4F5B-A3A7-322A509A9408}"
+            "ShowKeyOutput" = "11:TRUE"
+                "ExcludeFilters"
+                {
+                }
+            }
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_BEF2CFAD33BC48028E53B37702D2C014"
+            {
+            "SourcePath" = "8:..\\x64\\Debug\\GameLib.exe"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_37A39461190D425D981E1C2ACE7C67A7"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            "ProjectOutputGroupRegister" = "3:1"
+            "OutputConfiguration" = "8:"
+            "OutputGroupCanonicalName" = "8:Built"
             "OutputProjectGuid" = "8:{82ADF7ED-292B-4F5B-A3A7-322A509A9408}"
             "ShowKeyOutput" = "11:TRUE"
                 "ExcludeFilters"
