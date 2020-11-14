@@ -76,3 +76,4 @@ C:\Users\PRATEEK SINGH\GameLib\x64\Debug\Resources\Audio\Thanks.wav
 C:\Users\PRATEEK SINGH\GameLib\x64\Debug\Resources\Audio\Win.wav
 C:\Users\PRATEEK SINGH\GameLib\x64\Debug\Resources\Assets\Hangman\anim.ai
 C:\Users\PRATEEK SINGH\GameLib\x64\Debug\Resources\Assets\Hangman\anim2.ai
+F:\GameLib\x64\Debug\Resources\Assets\Flappy\back.png

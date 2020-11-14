@@ -246,12 +246,8 @@ void User::input() {
 						if (checkError() != 0) {
 							std::string userFolder = "Resources/User";
 							int status = _mkdir(userFolder.c_str());
-							std::cout << status << std::endl;
-							std::cout << errno << std::endl;
 							userFolder += "/" + username;
 							status = _mkdir(userFolder.c_str());
-							std::cout << status << std::endl;
-							std::cout << errno << std::endl;
 							putPassword = true;
 						}
 						else {
@@ -270,7 +266,6 @@ void User::input() {
 						if (!passFile) {
 							encrypt();
 							running = 0;
-							std::cout << "Password File created" << std::endl;
 						}
 						else {
 							std::string tmpPass = decrypt();
@@ -280,7 +275,6 @@ void User::input() {
 							else {
 								error = true;
 							}
-							std::cout << "Password File not created" << std::endl;
 						}
 					}
 					else {

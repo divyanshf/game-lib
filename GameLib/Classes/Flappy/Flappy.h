@@ -29,7 +29,7 @@ private:
 	TTF_Font* titleFont, * normalFont, * playerFont, * instructionFont;
 	Mix_Music* bgm;
 	Mix_Chunk* clickEffect, * loseEffect, * winnerEffect, * errorEffect;
-	Object volume, bird;
+	Object volume, bird, background;
 	bool isMute;
 	int winWidth, winHeight;
 	int FPS;

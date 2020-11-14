@@ -27,6 +27,9 @@ Flappy::Flappy(SDL_Renderer* ren, SDL_Window* win, std::string username) {
 	volume.setSource(0, 0, 50, 50);
 	bird.setImage("Resources/Assets/Flappy/flappy.png", ren);
 	bird.setSource(0, 0, 300, 200);
+	background.setImage("Resources/Assets/Flappy/back.png", ren);
+	background.setDest(0, 0, winWidth, winHeight);
+	background.setSource(0, 0, winWidth, winHeight);
 
 	//	Initialize title and fonts
 	head = "FLAPPY BIRD";
@@ -109,14 +112,13 @@ void Flappy::addPipes() {
 	pipes.push_back(tmpPipe);
 }
 
-//	Hang main loop
+//	Flappy main loop
 void Flappy::loop() {
 	//double first;
 	//double last = 0;
 	Mix_PlayMusic(bgm, -1);
 	while (running) {
 	frameStart = SDL_GetTicks();
-//	first = SDL_GetTicks();
 		render();
 		input();
 		update();
@@ -126,11 +128,6 @@ void Flappy::loop() {
 		if (frameDelay > frameTime) {
 			SDL_Delay(frameDelay - frameTime);
 		}
-		/*if (first - last < 16.7)
-		{
-			SDL_Delay(16.7 - (first - last));
-		}
-		last = first;*/
 	}
 	
 	Mix_HaltMusic();
@@ -143,20 +140,8 @@ void Flappy::render() {
 
 	int textWidth, textHeight;
 	
-	SDL_Surface* surface;
-	surface = IMG_Load("GameLib/Resources/Assets/Flappy/211.png");
-	SDL_Texture* tex;
-	tex = SDL_CreateTextureFromSurface(ren, surface);
-	SDL_RenderCopy(ren,tex,NULL,NULL);
-
-	
-	SDL_SetRenderDrawColor(ren, 0, 0, 0, 255);
-	SDL_Rect rect;
-	rect.w = winWidth;
-	rect.h = winHeight;
-	rect.x = 0;
-	rect.y = 0;
-	SDL_RenderFillRect(ren, &rect);
+	//	Draw background
+	draw(background);
 
 	//	Pipes
 	SDL_SetRenderDrawColor(ren, 0, 255, 0, 255);
