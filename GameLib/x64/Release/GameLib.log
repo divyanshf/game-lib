@@ -22,9 +22,8 @@ F:\GameLib\GameLib\Classes\User\User.cpp(110,66): warning C4244: '+=': conversio
 F:\GameLib\GameLib\Classes\User\User.cpp(159,50): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
 F:\GameLib\GameLib\Classes\User\User.cpp(179,50): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
   Generating code
+  Previous IPDB was built with incompatible compiler, fall back to full compilation.
 F:\GameLib\GameLib\Classes\Menu\Menu.cpp(61): warning C4715: 'Menu::loop': not all control paths return a value
-  651 of 1074 functions (60.6%) were compiled, the rest were copied from previous compilation.
-    205 functions were new in current compilation
-    17 functions had inline decision re-evaluated but remain unchanged
+  All 1065 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   Finished generating code
   GameLib.vcxproj -> F:\GameLib\x64\Release\GameLib.exe

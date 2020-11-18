@@ -51,6 +51,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_2D56FB35C4C24AE7B0C24406F9D0B156"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_390996EFA1BD4A74B2B64A6C996907FA"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -93,13 +99,25 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_911FABF97A3444D0868BEDA06FD73A20"
+        "MsmKey" = "8:_9A1B95C6A8574A19997CF27C1A8886C5"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_AEA10D7807404989AB8E22D25596A874"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_B9722AF253834E369DE717C6431DD66A"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_BE4C886DAEAE4E6D9B20A0921C3F52E1"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -333,6 +351,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2D56FB35C4C24AE7B0C24406F9D0B156"
+            {
+            "SourcePath" = "8:..\\Dependencies\\SDL_ttf\\lib\\x64\\SDL2_ttf.dll"
+            "TargetName" = "8:SDL2_ttf.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_37A39461190D425D981E1C2ACE7C67A7"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_390996EFA1BD4A74B2B64A6C996907FA"
             {
             "SourcePath" = "8:..\\Dependencies\\SDL_mixer\\lib\\x64\\libogg-0.dll"
@@ -473,10 +511,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_911FABF97A3444D0868BEDA06FD73A20"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9A1B95C6A8574A19997CF27C1A8886C5"
             {
-            "SourcePath" = "8:..\\Dependencies\\SDL_image\\lib\\x64\\SDL2_image.dll"
-            "TargetName" = "8:SDL2_image.dll"
+            "SourcePath" = "8:..\\Dependencies\\SDL\\lib\\x64\\SDL2.dll"
+            "TargetName" = "8:SDL2.dll"
             "Tag" = "8:"
             "Folder" = "8:_37A39461190D425D981E1C2ACE7C67A7"
             "Condition" = "8:"
@@ -497,6 +535,46 @@
             {
             "SourcePath" = "8:..\\README.md"
             "TargetName" = "8:README.md"
+            "Tag" = "8:"
+            "Folder" = "8:_37A39461190D425D981E1C2ACE7C67A7"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B9722AF253834E369DE717C6431DD66A"
+            {
+            "SourcePath" = "8:..\\Dependencies\\SDL_image\\lib\\x64\\SDL2_image.dll"
+            "TargetName" = "8:SDL2_image.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_37A39461190D425D981E1C2ACE7C67A7"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BE4C886DAEAE4E6D9B20A0921C3F52E1"
+            {
+            "SourcePath" = "8:..\\Dependencies\\SDL_mixer\\lib\\x64\\SDL2_mixer.dll"
+            "TargetName" = "8:SDL2_mixer.dll"
             "Tag" = "8:"
             "Folder" = "8:_37A39461190D425D981E1C2ACE7C67A7"
             "Condition" = "8:"
@@ -610,7 +688,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Gamelib"
         "ProductCode" = "8:{E707F96D-E16F-4E40-AD93-4868743E0DF1}"
-        "PackageCode" = "8:{FB6E1DFA-72B5-418D-8282-5EC185DF270C}"
+        "PackageCode" = "8:{C7E5F17E-3E67-4D0F-99E8-3EDFBD88BAA2}"
         "UpgradeCode" = "8:{A44E7766-A82A-4448-A514-E1FBA3062195}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
