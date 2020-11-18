@@ -12,7 +12,7 @@ This comes under our project for Object Oriented Programming Language. The under
 - SNAKE
 - FLAPPY BIRD
 
-### Folder Structure
+### Directory Structure
 - GameLib (Solution Directory)
   - GameLib (Folder)
     - Application.cpp (main cpp file)
