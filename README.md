@@ -15,7 +15,7 @@ This comes under our project for Object Oriented Programming Language. The under
 ### Issues
 - If your best scores aren't updating, try to run the executable in administrative mode (if not already).
 - If there is an error of missing .dll files, try to re-install the package. If the issue stays, download the dll(s) from the project dependancies and store them in the application folder.
-- If the some dlls are still missing, download the latest version of Visual C++ Redistributable [here](https://www.microsoft.com/en-in/download/details.aspx?id=40784).
+- If the some dlls are still missing, download the latest version of Visual C++ Redistributable [here](https://aka.ms/vs/16/release/vc_redist.x64.exe).
 
 ### Setup
 You can download the latest version of GameLib [here](https://github.com/DivyanshFalodiya/GameLib/files/5560241/GameLib.zip).
