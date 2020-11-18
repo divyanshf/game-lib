@@ -2,15 +2,15 @@
 ### The Library For Games
 This is a C++ project to build an SDL2 based application which features multiple games to entertain you.
 
+### Objective
+This comes under our project for Object Oriented Programming Language. The underlying principles and basic conectps of OOPS are the basis of this project.
+
 ### Games
 - TIC-TAC-TOE
 - PONG
 - HANGMAN
 - SNAKE
 - FLAPPY BIRD
-
-### Concept
-This comes under our project for Object Oriented Programming Language. The underlying principles and basic conectps of OOPS are the basis of this project.
 
 ### Issues
 - If your best scores aren't updating, try to run the executable in administrative mode (if not already).
