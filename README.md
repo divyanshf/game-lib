@@ -18,6 +18,6 @@ This comes under our project for Object Oriented Programming Language. The under
 - If the some dlls are still missing, download the latest version of Visual C++ Redistributable [here](https://www.microsoft.com/en-in/download/details.aspx?id=40784).
 
 ### Setup
-You can download the latest version of GameLib [here](https://github.com/DivyanshFalodiya/GameLib/files/5540760/Gamelib.zip).
+You can download the latest version of GameLib [here](https://github.com/DivyanshFalodiya/GameLib/files/5560241/GameLib.zip).
 
 We will keep enhancing this project regularly.
