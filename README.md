@@ -13,13 +13,13 @@ This comes under our project for Object Oriented Programming Language. The under
 - FLAPPY BIRD
 
 ### Folder Structure
-|_ GameLib (Solution Directory)
-  |_ GameLib (Folder)
-    |_ Application.cpp (main cpp file)
-    |_ Classes (Folder)
-      |_ All the required classes (.h and .cpp files)
-    _ Resources (Folder containing required resources like images, audio, etc.)
-  |_ Gamelib_setup (Folder containing the setup (installer) build of GameLib)
+- GameLib (Solution Directory)
+  - GameLib (Folder)
+    - Application.cpp (main cpp file)
+    - Classes (Folder)
+      - All the required classes (.h and .cpp files)
+    - Resources (Folder containing required resources like images, audio, etc.)
+  - Gamelib_setup (Folder containing the setup (installer) build of GameLib)
 
 ### Issues
 - If your best scores aren't updating, try to run the executable in administrative mode (if not already).
