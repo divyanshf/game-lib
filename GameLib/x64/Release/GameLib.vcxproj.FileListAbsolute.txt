@@ -37,3 +37,4 @@ F:\GameLib\x64\Release\Resources\Assets\Hangman\anim.ai
 F:\GameLib\x64\Release\Resources\Assets\Hangman\anim2.ai
 F:\GameLib\x64\Release\Resources\Assets\GameImage\Controller.png
 F:\GameLib\x64\Release\Resources\Assets\GameImage\Flappy.png
+F:\GameLib\x64\Release\Resources\Assets\Flappy\back.png

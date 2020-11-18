@@ -1,9 +1,30 @@
-﻿  Flappy.cpp
-F:\GameLib\GameLib\Classes\Flappy\Flappy.cpp(39,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-F:\GameLib\GameLib\Classes\Flappy\Flappy.cpp(73,29): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+﻿  Application.cpp
+  Flappy.cpp
+F:\GameLib\GameLib\Classes\Flappy\Flappy.cpp(42,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+F:\GameLib\GameLib\Classes\Flappy\Flappy.cpp(76,29): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+  Hang.cpp
+F:\GameLib\GameLib\Classes\Hangman\Hang.cpp(39,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+F:\GameLib\GameLib\Classes\Hangman\Hang.cpp(227,45): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  Initialize.cpp
+  Menu.cpp
+F:\GameLib\GameLib\Classes\Menu\Menu.cpp(58,24): warning C4244: 'return': conversion from '__int64' to 'int', possible loss of data
+  Object.cpp
+  Pong.cpp
+  Snake.cpp
+F:\GameLib\GameLib\Classes\Snake\Snake.cpp(10,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Tic.cpp
+F:\GameLib\GameLib\Classes\Tic\Tic.cpp(100,61): warning C4244: '=': conversion from '__int64' to 'int', possible loss of data
+F:\GameLib\GameLib\Classes\Tic\Tic.cpp(112,17): warning C4101: 'textHeight': unreferenced local variable
+  TicBoard.cpp
+F:\GameLib\GameLib\Classes\Tic\TicBoard.cpp(13,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  User.cpp
+F:\GameLib\GameLib\Classes\User\User.cpp(110,66): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+F:\GameLib\GameLib\Classes\User\User.cpp(159,50): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+F:\GameLib\GameLib\Classes\User\User.cpp(179,50): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
   Generating code
-  4 of 869 functions ( 0.5%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+F:\GameLib\GameLib\Classes\Menu\Menu.cpp(61): warning C4715: 'Menu::loop': not all control paths return a value
+  651 of 1074 functions (60.6%) were compiled, the rest were copied from previous compilation.
+    205 functions were new in current compilation
+    17 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   GameLib.vcxproj -> F:\GameLib\x64\Release\GameLib.exe
