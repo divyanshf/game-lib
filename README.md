@@ -1,22 +1,24 @@
 # GameLib
-### The Library For Games
-This is a C++ project to build an SDL2 based application which features multiple games to entertain you.
+## Description
+A desktop based application which features multiple games to entertain you.
 
-### Objective
-This comes under our project for Object Oriented Programming Language. The underlying principles and basic conectps of OOPS are the basis of this project.
+## Objective
+The underlying principles and basic conectps of OOPS are the basis of this project.
 
-### Games
+## Technologies / Libraries Used
+- C++
+- SDL2
+
+## Games
 - TIC-TAC-TOE
 - PONG
 - HANGMAN
 - SNAKE
 - FLAPPY BIRD
 
-### Issues
+## Common Issues
 - If your best scores aren't updating, try to run the executable in administrative mode (if not already).
-- If the some dlls are still missing, download the latest version of Visual C++ Redistributable [here](https://aka.ms/vs/16/release/vc_redist.x64.exe).
+- If the some dlls are still missing, download the latest version of [Visual C++ Redistributable](https://aka.ms/vs/16/release/vc_redist.x64.exe).
 
-### Setup
+## Setup
 You can download the latest version of GameLib [here](https://github.com/DivyanshFalodiya/GameLib/files/5560401/GameLib.zip).
-
-We will keep enhancing this project regularly.
